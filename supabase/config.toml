@@ -1,0 +1,2 @@
+[functions.generate-feedback]
+verify_jwt = true

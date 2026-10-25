@@ -1,0 +1,744 @@
+/* Paleta global inspirada en el portafolio de referencia: grafito, plata y blanco. */
+:root {
+  color-scheme: dark;
+  --bg: #171b21;
+  --surface: #22272e;
+  --surface2: #2b3139;
+  --surface-warm: #1d232a;
+  --border: rgba(224,230,238,.13);
+  --border-warm: rgba(224,230,238,.15);
+  --border2: rgba(224,230,238,.23);
+  --lime: #d6dbe3;
+  --lime-dim: rgba(198,207,218,.12);
+  --lime-glow: rgba(198,207,218,.18);
+  --em: #bdc5d0;
+  --em-dark: #8994a2;
+  --em-light: rgba(198,207,218,.11);
+  --text: #f1f3f6;
+  --text-primary: #f1f3f6;
+  --text-muted: #c0c6cf;
+  --text-subtle: #969eaa;
+  --muted: #c0c6cf;
+  --subtle: #747e8b;
+}
+
+html, body, #root { min-height: 100%; }
+html { background: #171b21; }
+body, .scene-bg {
+  color: #f1f3f6;
+  background-color: #171b21;
+  background-image: radial-gradient(ellipse at 78% 0%,rgba(111,124,143,.13),transparent 42rem),linear-gradient(145deg,#171b21,#1c222a 54%,#171b21);
+}
+::selection { color: #15191e; background: #dce1e8; }
+
+/* Neutraliza utilidades de color heredadas para que ninguna pantalla vuelva al verde. */
+#root .bg-white, #root .bg-slate-50, #root .bg-slate-100,
+#root .bg-teal-50, #root .bg-teal-100, #root .bg-cyan-50,
+#root .bg-green-50, #root .bg-amber-50, #root .bg-amber-100,
+#root [class~="from-amber-50"][class~="to-orange-50"],
+#root [class~="from-teal-50"][class~="to-cyan-50"] {
+  border-color: rgba(224,230,238,.14) !important;
+  color: #dce1e8 !important;
+  background-color: rgba(197,206,218,.075) !important;
+  background-image: linear-gradient(135deg,rgba(197,206,218,.09),rgba(197,206,218,.025)) !important;
+}
+#root .text-teal-100, #root .text-teal-700, #root .text-teal-600, #root .text-teal-500,
+#root .text-cyan-700, #root .text-cyan-600, #root .text-cyan-500,
+#root .text-green-700, #root .text-green-600, #root .text-green-500,
+#root .text-amber-800, #root .text-amber-700, #root .text-amber-600, #root .text-amber-500,
+#root .text-blue-700, #root .text-blue-600, #root .text-blue-500 { color: #c8cfd9 !important; }
+#root .border-teal-100, #root .border-teal-200, #root .border-cyan-100, #root .border-green-100,
+#root .border-amber-100, #root .border-amber-200, #root .border-blue-100 { border-color: rgba(224,230,238,.16) !important; }
+#root .bg-teal-500, #root .bg-teal-600, #root .bg-cyan-600, #root .bg-green-600 { background-color: #cbd2dc !important; color: #1a1e24 !important; }
+#root [class~="from-teal-600"][class~="to-cyan-600"],
+#root [class~="from-teal-500"][class~="to-cyan-600"],
+#root [class~="from-teal-500"][class~="to-cyan-500"] {
+  color: #171b21 !important;
+  background-image: linear-gradient(112deg,#e3e6eb,#aeb7c3) !important;
+}
+#root [class~="shadow-teal-500\/25"], #root [class~="shadow-teal-500\/30"] { --tw-shadow-color: rgba(190,200,213,.2) !important; }
+
+/* Marco y navegación persistentes. */
+#root .site-header, #root .mobile-nav {
+  border-color: rgba(224,230,238,.14) !important;
+  color: #f1f3f6;
+  background: rgba(25,30,37,.88) !important;
+  box-shadow: 0 8px 28px rgba(0,0,0,.12);
+  backdrop-filter: blur(22px);
+}
+#root .brand-name, #root .brand-caption { color: #f1f3f6; }
+#root .brand-caption { opacity: .62; }
+#root .site-header a, #root .site-header button, #root .mobile-nav a { color: #c4cbd5; }
+#root .site-header a:hover, #root .site-header button:hover, #root .mobile-nav a:hover { color: #fff; }
+#root .site-header .is-active, #root .mobile-nav .is-active,
+#root .site-header [aria-current="page"], #root .mobile-nav [aria-current="page"] {
+  border-color: rgba(226,231,238,.28) !important;
+  color: #f5f6f8 !important;
+  background: linear-gradient(145deg,rgba(210,217,226,.22),rgba(210,217,226,.09)) !important;
+}
+#root .dashboard-shell, #root .profile-screen, #root .setup-screen { color: #f1f3f6; }
+
+/* Acceso y registro: misma gama fría, incluida la fotografía de portada. */
+#root .auth-page, #root .auth-portal {
+  color: #f1f3f6;
+  background: #171b21 !important;
+}
+#root .auth-portal-cover > span {
+  background: radial-gradient(ellipse at 74% 22%,rgba(177,188,202,.12),transparent 38rem),linear-gradient(100deg,rgba(15,18,23,.96) 0%,rgba(35,41,50,.78) 42%,rgba(27,32,39,.44) 74%,rgba(10,12,16,.35) 100%),linear-gradient(180deg,rgba(17,20,25,.3),transparent 24%,transparent 76%,rgba(8,10,14,.68)) !important;
+}
+#root .auth-portal-poster > p, #root .auth-portal-poster-note { color: rgba(235,238,243,.82) !important; }
+#root .auth-portal-poster-note i, #root .auth-portal-panel-top > span svg,
+#root .auth-portal-privacy svg { color: #d5dbe3 !important; background-color: #d5dbe3; }
+#root .auth-portal-phrase {
+  background-image: linear-gradient(105deg,#f4f5f7 0%,#bac3ce 43%,#8e99a8 62%,#f4f5f7 100%) !important;
+}
+#root .auth-portal-header-actions .auth-portal-signup,
+#root .auth-portal-header-actions button {
+  border-color: rgba(241,243,246,.56) !important;
+  color: #f1f3f6 !important;
+  background: rgba(25,30,37,.42) !important;
+}
+#root .auth-portal-header-actions .auth-portal-signup:hover,
+#root .auth-portal-header-actions button:hover { color: #171b21 !important; background: #e1e5eb !important; }
+#root .auth-portal-panel {
+  border-color: rgba(224,230,238,.16) !important;
+  color: #f1f3f6 !important;
+  background: radial-gradient(ellipse at 85% 0%,rgba(170,182,198,.1),transparent 24rem),linear-gradient(145deg,rgba(35,41,49,.99),rgba(20,24,30,.995) 55%) !important;
+}
+#root .auth-portal-panel-top { border-color: rgba(224,230,238,.12); background: rgba(27,32,39,.92); }
+#root .auth-portal-form-heading > p, #root .auth-portal-panel-top > span,
+#root .auth-portal-form .auth-switch a, #root .auth-portal-panel .auth-switch a { color: #d0d6df !important; }
+#root .auth-portal-form .auth-input { border-color: rgba(224,230,238,.18) !important; background: rgba(12,15,20,.52) !important; }
+#root .auth-portal-form .auth-input:focus { border-color: rgba(216,223,232,.62) !important; box-shadow: 0 0 0 3px rgba(198,207,218,.13) !important; }
+#root .auth-portal-form .auth-submit { color: #171b21 !important; background: linear-gradient(120deg,#e4e7ec,#b7c0cc) !important; }
+#root .auth-portal-form .auth-submit:hover { background: #f3f4f6 !important; }
+
+/* Ajustes finales vistos en la vista seleccionada de voz/texto. */
+#root .setup-area-back-button {
+  border-color: rgba(224,230,238,.24) !important;
+  color: #e0e4ea !important;
+  background: linear-gradient(145deg,rgba(197,206,218,.13),rgba(197,206,218,.055)) !important;
+}
+#root .setup-area-back-button:hover { border-color: rgba(224,230,238,.46) !important; background: rgba(197,206,218,.16) !important; }
+#root .setup-role-stage-praise { color: #c1c8d2 !important; }
+#root .setup-role-stage-praise strong,
+#root .setup-role-stage-praise svg { color: #d5dbe3 !important; }
+#root .setup-unified-panel--role-selected .setup-hero-title em .animated-word {
+  color: #cbd2dc !important;
+  background: none !important;
+  background-image: none !important;
+  background-clip: initial !important;
+  -webkit-background-clip: initial !important;
+  -webkit-text-fill-color: #cbd2dc !important;
+  animation: none !important;
+  filter: none !important;
+  text-shadow: none !important;
+}
+
+/* Dashboard. */
+#root .dashboard-unified-panel {
+  border-color: rgba(224,230,238,.15) !important;
+  background: radial-gradient(ellipse at 85% 0%,rgba(158,171,190,.12),transparent 32rem),linear-gradient(137deg,#22272e 0%,#2b3139 52%,#20252c 100%) !important;
+  box-shadow: 0 24px 64px rgba(0,0,0,.24),inset 0 1px rgba(255,255,255,.08);
+}
+#root .dashboard-unified-panel::after, #root .dashboard-unified-panel .dashboard-hero::before,
+#root .dashboard-unified-panel .profile-metric-card::after { border-color: rgba(211,219,229,.13); box-shadow: 0 0 0 30px rgba(211,219,229,.018),0 0 0 65px rgba(211,219,229,.012); }
+#root .dashboard-unified-panel .dashboard-hero { border-color: rgba(224,230,238,.13); }
+#root .dashboard-unified-panel .hero-title, #root .dashboard-unified-panel .metric-value,
+#root .dashboard-unified-panel .panel-heading, #root .dashboard-unified-panel .section-title { color: #f1f3f6 !important; }
+#root .dashboard-unified-panel .hero-description, #root .dashboard-unified-panel .tip-panel-intro,
+#root .dashboard-unified-panel .empty-tip { color: #c0c6cf !important; }
+#root .dashboard-unified-panel .hero-meta, #root .dashboard-unified-panel .metric-note { color: #9da6b2 !important; }
+#root .dashboard-unified-panel .metric-card {
+  border-color: rgba(224,230,238,.16) !important;
+  background: linear-gradient(145deg,#2a3038,#20252c) !important;
+}
+#root .dashboard-unified-panel .metric-card::before { background: linear-gradient(90deg,rgba(31,36,43,.96),rgba(31,36,43,.78) 48%,rgba(31,36,43,.18)),linear-gradient(0deg,rgba(25,29,35,.48),transparent 70%); }
+#root .dashboard-unified-panel .metric-icon, #root .dashboard-unified-panel .dashboard-tip-icon,
+#root .dashboard-unified-panel .dashboard-tip-label { color: #d7dde5 !important; }
+#root .dashboard-unified-panel .dashboard-tip-card { border-color: rgba(224,230,238,.15); background: linear-gradient(135deg,rgba(255,255,255,.065),rgba(255,255,255,.02)); }
+#root .dashboard-unified-panel .dashboard-tip-text, #root .dashboard-unified-panel .dashboard-tip-question span,
+#root .dashboard-unified-panel .first-session-note strong { color: #e3e6eb !important; }
+#root .dashboard-unified-panel .practice-card { border-color: rgba(224,230,238,.18) !important; color: #f1f3f6 !important; background: linear-gradient(145deg,#252b33,#1c2128) !important; }
+#root .dashboard-unified-panel .practice-card::before { background: linear-gradient(90deg,rgba(24,29,36,.96),rgba(24,29,36,.82) 42%,rgba(24,29,36,.2)),linear-gradient(0deg,rgba(24,29,36,.5),transparent 55%); }
+#root .dashboard-unified-panel .dashboard-lower, #root .dashboard-unified-panel .dashboard-lower .border-t { border-color: rgba(224,230,238,.13) !important; }
+
+/* Configuración de voz y texto: ambos modos comparten el mismo lienzo oscuro. */
+#root .setup-unified-panel--voice, #root .setup-unified-panel--text {
+  border-color: rgba(224,230,238,.15) !important;
+  color: #f1f3f6 !important;
+  background: radial-gradient(ellipse at 76% 0%,rgba(153,166,185,.12),transparent 34rem),linear-gradient(145deg,#22272e,#2b3139 58%,#20252c) !important;
+  box-shadow: 0 24px 58px rgba(0,0,0,.25),inset 0 1px rgba(255,255,255,.08) !important;
+}
+#root .setup-unified-panel--voice .setup-hero, #root .setup-unified-panel--text .setup-hero,
+#root .setup-unified-panel--voice .setup-workspace, #root .setup-unified-panel--text .setup-workspace { background-color: transparent !important; }
+#root .setup-unified-panel--voice .setup-hero-title, #root .setup-unified-panel--text .setup-hero-title,
+#root .setup-unified-panel--voice .setup-selection-intro h2, #root .setup-unified-panel--text .setup-selection-intro h2,
+#root .setup-unified-panel--voice .setup-section-label h2, #root .setup-unified-panel--text .setup-section-label h2,
+#root .setup-unified-panel--voice .setup-role-copy strong, #root .setup-unified-panel--text .setup-role-copy strong,
+#root .setup-unified-panel--voice .setup-type-copy strong, #root .setup-unified-panel--text .setup-type-copy strong,
+#root .setup-unified-panel--voice .setup-count-number, #root .setup-unified-panel--text .setup-count-number { color: #f1f3f6 !important; }
+#root .setup-unified-panel--voice .setup-hero-title em, #root .setup-unified-panel--text .setup-hero-title em,
+#root .setup-unified-panel--voice .setup-hero-title em .animated-word, #root .setup-unified-panel--text .setup-hero-title em .animated-word { color: #d0d6df !important; }
+#root .setup-unified-panel--voice .setup-hero-title em .animated-word, #root .setup-unified-panel--text .setup-hero-title em .animated-word { background-image: linear-gradient(100deg,#d9dee6,#f3f4f6 48%,#9da8b7 72%,#d9dee6) !important; }
+#root .setup-unified-panel--voice .setup-hero-overline, #root .setup-unified-panel--text .setup-hero-overline,
+#root .setup-unified-panel--voice .setup-hero-description, #root .setup-unified-panel--text .setup-hero-description,
+#root .setup-unified-panel--voice .setup-hero-footnote, #root .setup-unified-panel--text .setup-hero-footnote,
+#root .setup-unified-panel--voice .setup-selection-intro p, #root .setup-unified-panel--text .setup-selection-intro p,
+#root .setup-unified-panel--voice .setup-section-label p, #root .setup-unified-panel--text .setup-section-label p { color: #bbc2cc !important; }
+#root .setup-unified-panel--voice .setup-selection-kicker, #root .setup-unified-panel--text .setup-selection-kicker,
+#root .setup-unified-panel--voice .setup-role-compliment strong, #root .setup-unified-panel--text .setup-role-compliment strong,
+#root .setup-unified-panel--voice .setup-role-compliment svg, #root .setup-unified-panel--text .setup-role-compliment svg { color: #d5dbe3 !important; }
+#root .setup-unified-panel--voice .setup-selection-intro, #root .setup-unified-panel--text .setup-selection-intro,
+#root .setup-unified-panel--voice .setup-step-section, #root .setup-unified-panel--text .setup-step-section,
+#root .setup-unified-panel--voice .setup-summary-column, #root .setup-unified-panel--text .setup-summary-column { border-color: rgba(224,230,238,.14) !important; }
+#root .setup-unified-panel--voice .setup-section-number, #root .setup-unified-panel--text .setup-section-number,
+#root .setup-unified-panel--voice .setup-role-icon, #root .setup-unified-panel--text .setup-role-icon,
+#root .setup-unified-panel--voice .setup-type-icon, #root .setup-unified-panel--text .setup-type-icon {
+  border-color: rgba(224,230,238,.2) !important; color: #d9dee6 !important;
+  background: linear-gradient(145deg,#46505d,#303741) !important;
+}
+#root .setup-unified-panel--voice .setup-role-grid, #root .setup-unified-panel--text .setup-role-grid,
+#root .setup-unified-panel--voice .setup-type-grid, #root .setup-unified-panel--text .setup-type-grid,
+#root .setup-unified-panel--voice .setup-count-grid, #root .setup-unified-panel--text .setup-count-grid { border-color: rgba(224,230,238,.16) !important; background: rgba(8,11,15,.24) !important; }
+#root .setup-unified-panel--voice .setup-role-choice, #root .setup-unified-panel--text .setup-role-choice,
+#root .setup-unified-panel--voice .setup-type-choice, #root .setup-unified-panel--text .setup-type-choice,
+#root .setup-unified-panel--voice .setup-count-choice, #root .setup-unified-panel--text .setup-count-choice,
+#root .setup-unified-panel--voice .setup-role-deck-card, #root .setup-unified-panel--text .setup-role-deck-card {
+  border-color: rgba(224,230,238,.16) !important; color: #e9ecf0 !important;
+  background: linear-gradient(145deg,#303741,#252b33) !important;
+}
+#root .setup-unified-panel--voice .setup-choice.is-selected, #root .setup-unified-panel--text .setup-choice.is-selected,
+#root .setup-unified-panel--voice .setup-type-choice.is-selected, #root .setup-unified-panel--text .setup-type-choice.is-selected,
+#root .setup-unified-panel--voice .setup-count-choice.is-selected, #root .setup-unified-panel--text .setup-count-choice.is-selected {
+  border-color: rgba(223,229,237,.56) !important;
+  background: linear-gradient(145deg,rgba(196,205,217,.24),rgba(124,136,152,.15)) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.14),0 10px 24px rgba(0,0,0,.2) !important;
+}
+#root .setup-unified-panel--voice .setup-choice-check, #root .setup-unified-panel--text .setup-choice-check { border-color: rgba(224,230,238,.3) !important; background: linear-gradient(145deg,#39414c,#242a32) !important; }
+#root .setup-unified-panel--voice .setup-choice.is-selected .setup-choice-check, #root .setup-unified-panel--text .setup-choice.is-selected .setup-choice-check { border-color: #e2e6ec !important; color: #171b21 !important; background: linear-gradient(145deg,#f0f2f5,#aeb8c5) !important; }
+#root .setup-unified-panel--voice .setup-choice-wash, #root .setup-unified-panel--text .setup-choice-wash { background: linear-gradient(90deg,rgba(211,219,229,.14),transparent 85%) !important; }
+#root .setup-unified-panel--voice .setup-type-choice:hover, #root .setup-unified-panel--text .setup-type-choice:hover,
+#root .setup-unified-panel--voice .setup-count-choice:hover, #root .setup-unified-panel--text .setup-count-choice:hover,
+#root .setup-unified-panel--voice .setup-role-deck-card:hover, #root .setup-unified-panel--text .setup-role-deck-card:hover { border-color: rgba(223,229,237,.42) !important; }
+#root .setup-unified-panel--voice .setup-count-choice.is-selected .setup-count-number, #root .setup-unified-panel--text .setup-count-choice.is-selected .setup-count-number,
+#root .setup-unified-panel--voice .setup-type-choice.is-selected .setup-type-icon, #root .setup-unified-panel--text .setup-type-choice.is-selected .setup-type-icon { color: #171b21 !important; background: linear-gradient(145deg,#e7eaef,#aeb8c5) !important; }
+#root .setup-unified-panel--voice .setup-count-meta, #root .setup-unified-panel--text .setup-count-meta,
+#root .setup-unified-panel--voice .setup-type-copy > span, #root .setup-unified-panel--text .setup-type-copy > span,
+#root .setup-unified-panel--voice .setup-role-copy > span:last-child, #root .setup-unified-panel--text .setup-role-copy > span:last-child,
+#root .setup-unified-panel--voice .setup-choice-overline, #root .setup-unified-panel--text .setup-choice-overline { color: #aeb6c1 !important; }
+#root .setup-unified-panel--voice .setup-role-selected-stage, #root .setup-unified-panel--text .setup-role-selected-stage,
+#root .setup-unified-panel--voice .setup-session-console, #root .setup-unified-panel--text .setup-session-console {
+  border-color: rgba(224,230,238,.17) !important;
+  background: radial-gradient(ellipse at 76% 45%,rgba(157,170,189,.11),transparent 30rem),linear-gradient(145deg,#303741,#20252c) !important;
+}
+#root .setup-unified-panel--voice .setup-role-compliment, #root .setup-unified-panel--text .setup-role-compliment,
+#root .setup-unified-panel--voice .setup-option-active, #root .setup-unified-panel--text .setup-option-active { border-color: rgba(224,230,238,.2) !important; color: #dce1e8 !important; background: rgba(197,206,218,.1) !important; }
+#root .setup-unified-panel--voice .setup-preview-privacy, #root .setup-unified-panel--text .setup-preview-privacy,
+#root .setup-unified-panel--voice .setup-summary-await, #root .setup-unified-panel--text .setup-summary-await { color: #aeb6c1 !important; }
+#root .setup-unified-panel--voice .setup-preview-privacy a, #root .setup-unified-panel--text .setup-preview-privacy a { color: #dce1e8 !important; }
+#root .setup-unified-panel--voice .setup-start-button, #root .setup-unified-panel--text .setup-start-button { color: #171b21 !important; background: linear-gradient(110deg,#e2e6eb,#aeb8c5) !important; box-shadow: 0 12px 28px rgba(0,0,0,.22) !important; }
+#root .setup-unified-panel--voice .setup-start-button.is-disabled, #root .setup-unified-panel--text .setup-start-button.is-disabled { color: #aeb6c1 !important; background: linear-gradient(145deg,#39414c,#2a3038) !important; }
+#root .setup-unified-panel--voice .setup-device-lines i, #root .setup-unified-panel--text .setup-device-lines i { background: #cbd2dc !important; }
+#root .setup-unified-panel--voice .setup-scene-orbit, #root .setup-unified-panel--text .setup-scene-orbit { border-color: rgba(216,223,232,.2) !important; }
+#root .setup-unified-panel--voice .setup-type-image::after, #root .setup-unified-panel--text .setup-type-image::after,
+#root .setup-unified-panel--voice .setup-count-image::after, #root .setup-unified-panel--text .setup-count-image::after { background: linear-gradient(90deg,#303741 0%,rgba(48,55,65,.1) 100%) !important; }
+#root .setup-unified-panel--voice .setup-role-grid--expanded > .setup-role-choice.is-role-preview-card,
+#root .setup-unified-panel--text .setup-role-grid--expanded > .setup-role-choice.is-role-preview-card { border-color: rgba(223,229,237,.62) !important; box-shadow: 0 0 0 3px rgba(198,207,218,.12),0 24px 44px rgba(0,0,0,.24) !important; }
+
+/* Entrevista activa y resultados: superficies oscuras y controles en plata. */
+#root .interview-experience {
+  --flow-lime: #d4dbe4;
+  --flow-panel: rgba(37,43,51,.94);
+  --flow-muted: #bac2cd;
+  border-color: rgba(224,230,238,.15) !important;
+  background: radial-gradient(ellipse at 86% 0%,rgba(151,164,183,.11),transparent 34rem),linear-gradient(145deg,#1c2128,#262c34 56%,#1c2128) !important;
+}
+#root .interview-experience::before { background: radial-gradient(ellipse at 26% 30%,rgba(197,207,220,.09),transparent 35%),radial-gradient(ellipse at 78% 70%,rgba(116,129,147,.1),transparent 38%); }
+#root .interview-experience::after, #root .interview-visual-orbit { border-color: rgba(215,222,231,.17) !important; box-shadow: 0 0 0 28px rgba(215,222,231,.015),0 0 0 62px rgba(215,222,231,.01); }
+#root .interview-live-state, #root .interview-question-card::before { border-color: rgba(224,230,238,.18); color: #e1e5eb; background-color: rgba(197,206,218,.07); }
+#root .interview-eyebrow, #root .interview-header-copy h1 svg, #root .interview-visual-caption svg { color: #d5dbe3 !important; }
+#root .interview-header-visual { border-color: rgba(224,230,238,.18); background: #171b21; }
+#root .interview-visual-shade { background: linear-gradient(95deg,rgba(18,22,28,.52),rgba(18,22,28,.04) 55%,rgba(18,22,28,.42)),linear-gradient(0deg,rgba(18,22,28,.74),transparent 62%); }
+#root .interview-visual-wave i { background: #d4dbe4; box-shadow: 0 0 9px rgba(212,219,228,.32); }
+#root .interview-progress-track > div { background: linear-gradient(90deg,#929eae,#e2e6ec) !important; box-shadow: 0 0 14px rgba(197,206,218,.28); }
+#root .interview-question-card, #root .interview-action-card, #root .interview-feedback-card,
+#root .results-score-card, #root .results-highlight-card, #root .results-detail-panel {
+  border-color: rgba(224,230,238,.14) !important;
+  background: linear-gradient(145deg,rgba(47,54,63,.96),rgba(34,40,48,.98)) !important;
+}
+#root .interview-question-card:hover, #root .interview-feedback-card:hover { border-color: rgba(224,230,238,.3) !important; }
+#root .interview-experience .text-teal-700, #root .interview-experience .text-teal-600,
+#root .interview-experience .text-teal-500, #root .interview-experience .text-blue-600,
+#root .results-score-card .text-teal-600, #root .results-score-card .text-blue-600 { color: #d5dbe3 !important; }
+#root .interview-experience .text-amber-800, #root .interview-experience .text-amber-700,
+#root .interview-experience .text-amber-600, #root .interview-experience .text-amber-500 { color: #cbd2dc !important; }
+#root .interview-question-card .bg-teal-50, #root .interview-question-card .bg-slate-50,
+#root .interview-experience .bg-slate-100 { border-color: rgba(224,230,238,.14) !important; color: #dce1e8 !important; background: rgba(197,206,218,.07) !important; }
+#root .interview-action-card--processing, #root .interview-feedback-card--accent { background: linear-gradient(145deg,rgba(58,66,77,.95),rgba(35,41,49,.98)) !important; }
+#root .interview-record-button { background: radial-gradient(circle at 32% 24%,#f0f2f5,#b5bfcc 62%,#788493) !important; box-shadow: 0 0 0 11px rgba(198,207,218,.07),0 16px 42px rgba(0,0,0,.3),inset 0 2px 5px rgba(255,255,255,.46) !important; }
+#root .interview-record-button svg { color: #20252c !important; }
+#root .interview-answer-input { border-color: rgba(224,230,238,.16) !important; background: rgba(13,16,21,.38) !important; }
+#root .interview-answer-input:focus { border-color: rgba(216,223,232,.48) !important; box-shadow: 0 0 0 4px rgba(198,207,218,.08); }
+#root .interview-feedback-next, #root .results-primary { color: #171b21 !important; background: linear-gradient(105deg,#e2e6eb,#aeb8c5) !important; box-shadow: 0 12px 30px rgba(0,0,0,.24); }
+#root .interview-feedback-next:hover, #root .results-primary:hover { box-shadow: 0 18px 38px rgba(0,0,0,.3); }
+#root .results-hero { background: #1c2128 !important; border-color: rgba(224,230,238,.18) !important; }
+#root .results-hero-overlay { background: linear-gradient(90deg,rgba(20,24,30,.98),rgba(20,24,30,.84) 48%,rgba(20,24,30,.34)),linear-gradient(0deg,rgba(15,19,24,.66),transparent 66%); }
+#root .results-hero .results-eyebrow, #root .results-score-card .text-teal-600,
+#root .results-highlight-card .text-teal-700, #root .results-highlight-card .text-teal-600,
+#root .results-tip-panel .text-amber-600, #root .results-detail-panel > .flex svg { color: #d5dbe3 !important; }
+#root .results-score-fill { background: linear-gradient(90deg,#929eae,#e2e6ec) !important; }
+#root .results-highlight-card--best, #root .results-highlight-card--improve, #root .results-tip-panel { background: linear-gradient(140deg,rgba(58,66,77,.92),rgba(34,40,48,.98)) !important; }
+#root .results-primary:hover { transform: translateY(-2px); }
+#root .results-secondary { border-color: rgba(224,230,238,.18) !important; color: #e2e6ec !important; background: rgba(42,48,57,.92) !important; }
+#root .results-secondary:hover { border-color: rgba(224,230,238,.34) !important; background: rgba(58,66,77,.95) !important; }
+
+/* Perfil y gráficas. */
+#root .profile-screen, #root .profile-unified-frame { color: #f1f3f6 !important; }
+#root .profile-unified-frame {
+  border-color: rgba(224,230,238,.15) !important;
+  background: radial-gradient(ellipse at 84% 0%,rgba(153,166,185,.12),transparent 31rem),linear-gradient(137deg,#22272e,#2b3139 52%,#20252c) !important;
+}
+#root .profile-hero { border-color: rgba(224,230,238,.13); }
+#root .profile-hero-eyebrow, #root .profile-hero h1 em, #root .profile-hero-tags svg,
+#root .profile-visual-chart-head span svg, #root .profile-visual-chart-head strong,
+#root .profile-visual-award, #root .profile-visual-sparkle { color: #d5dbe3 !important; }
+#root .profile-hero h1, #root .profile-visual-person-copy strong { color: #f1f3f6 !important; }
+#root .profile-hero-copy > p, #root .profile-metric-card p { color: #c0c6cf !important; }
+#root .profile-hero-tags > span, #root .profile-metric-card, #root .profile-visual-card {
+  border-color: rgba(224,230,238,.16) !important; color: #e1e5eb !important;
+  background: linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.02)) !important;
+}
+#root .profile-visual-card { background: linear-gradient(145deg,rgba(46,52,61,.96),rgba(28,33,40,.97)) !important; }
+#root .profile-visual-chart i, #root .profile-visual-chart i:nth-child(3n) { background: linear-gradient(180deg,#e1e5eb,#778392) !important; }
+#root .profile-metrics { border-color: rgba(224,230,238,.13); background: rgba(12,15,20,.16); }
+#root .profile-metric-card::after, #root .profile-unified-frame::after { border-color: rgba(211,219,229,.13); box-shadow: 0 0 0 30px rgba(211,219,229,.018),0 0 0 65px rgba(211,219,229,.012); }
+#root .profile-metric-icon, #root .profile-save-btn {
+  border-color: rgba(224,230,238,.2) !important; color: #1c2128 !important;
+  background: linear-gradient(135deg,#e2e6eb,#aeb8c5) !important;
+}
+#root .profile-response-chart, #root .profile-edit-card, #root .profile-settings-card,
+#root .profile-screen .bg-white { border-color: rgba(224,230,238,.15) !important; color: #e5e8ed !important; background: linear-gradient(145deg,#2b3139,#20252c) !important; }
+#root .profile-screen input, #root .profile-screen select { border-color: rgba(224,230,238,.19) !important; color: #f1f3f6 !important; background: #1c2229 !important; }
+#root .profile-screen input::placeholder { color: #838d9a !important; }
+#root .profile-response-chart-line, #root .profile-response-chart-point { stroke: #d5dbe3 !important; fill: #d5dbe3 !important; }
+#root .profile-response-chart-area { fill: url(#profile-score-area); }
+#root .profile-response-chart-axis, #root .profile-response-chart-foot { fill: #9da6b2; color: #9da6b2; }
+
+/* Alertas conservan estados semánticos de error; el resto sigue la paleta neutra. */
+#root .text-red-700, #root .text-red-600, #root .text-red-500, #root .text-red-400 { color: #ff9d9d !important; }
+#root .bg-red-50 { background: rgba(177,58,58,.12) !important; }
+#root .border-red-200, #root .border-red-100 { border-color: rgba(255,140,140,.22) !important; }
+
+/* Refinamiento final de bordes, tipografía y navegación sobre la paleta nueva. */
+#root .site-header-inner {
+  border-color: rgba(222,228,236,.12) !important;
+  color: #eff2f6 !important;
+  background: rgba(25,30,37,.92) !important;
+  box-shadow: 0 8px 28px rgba(0,0,0,.2),inset 0 1px rgba(255,255,255,.04) !important;
+}
+#root .site-header::after { background: #d7dde5 !important; box-shadow: 0 2px 12px rgba(215,221,229,.3) !important; }
+#root .desktop-nav { border-color: transparent !important; background: transparent !important; }
+#root .app-nav-link {
+  border-color: rgba(222,228,236,.1) !important;
+  border-radius: 14px !important;
+  color: #b9c1cc !important;
+  background: rgba(255,255,255,.025) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.025) !important;
+}
+#root .app-nav-link:hover, #root .app-nav-link.is-expanded, #root .app-nav-link:focus-visible {
+  border-color: rgba(222,228,236,.28) !important;
+  color: #f4f5f7 !important;
+  background: rgba(218,225,235,.09) !important;
+  box-shadow: 0 8px 20px rgba(0,0,0,.18),inset 0 1px rgba(255,255,255,.08) !important;
+}
+#root .app-nav-link.is-active, #root .app-nav-link.is-active:hover {
+  border-color: rgba(231,235,241,.16) !important;
+  color: #f4f5f7 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+#root .nav-active-bg {
+  border: 1px solid rgba(228,233,240,.3) !important;
+  border-radius: 14px !important;
+  background: linear-gradient(145deg,rgba(211,218,228,.23),rgba(136,148,165,.15)) !important;
+  box-shadow: 0 8px 20px rgba(0,0,0,.18),inset 0 1px rgba(255,255,255,.12) !important;
+}
+#root .app-nav-link::after { background: #e1e5eb !important; box-shadow: 0 0 9px rgba(225,229,235,.5) !important; }
+#root .nav-icon-wrap::before { background: radial-gradient(circle,rgba(217,224,233,.24),transparent 72%) !important; }
+#root .app-nav-link .nav-icon-wrap svg { color: #d3d9e1 !important; filter: none !important; }
+#root .app-nav-link.is-active .nav-icon-wrap svg, #root .app-nav-link:hover .nav-icon-wrap svg { color: #f1f3f6 !important; filter: drop-shadow(0 3px 7px rgba(210,218,228,.17)) !important; }
+#root .mobile-nav { border-color: rgba(224,230,238,.13) !important; background: rgba(24,29,36,.94) !important; box-shadow: 0 -8px 26px rgba(0,0,0,.18) !important; }
+#root .mobile-nav-link {
+  border-color: rgba(224,230,238,.12) !important;
+  color: #c4cbd5 !important;
+  background: linear-gradient(145deg,#2c333d,#20262e) !important;
+  box-shadow: 0 8px 22px rgba(0,0,0,.2),inset 0 1px rgba(255,255,255,.06) !important;
+}
+#root .mobile-nav-link.is-active { border-color: rgba(224,230,238,.3) !important; color: #f6f7f8 !important; box-shadow: 0 8px 24px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.09) !important; }
+#root .mobile-nav-active-bg { border: 1px solid rgba(228,233,240,.24) !important; background: linear-gradient(145deg,rgba(211,218,228,.2),rgba(136,148,165,.13)) !important; box-shadow: inset 0 1px rgba(255,255,255,.1) !important; }
+#root .mobile-nav-link > svg { color: inherit !important; }
+
+/* The dashboard's small labels, icons and card edges now use the same silver system. */
+#root .dashboard-unified-panel .hero-kicker, #root .dashboard-unified-panel .section-kicker,
+#root .dashboard-unified-panel .practice-number, #root .dashboard-unified-panel .practice-icon,
+#root .dashboard-unified-panel .metric-icon, #root .dashboard-unified-panel .dashboard-tip-icon,
+#root .dashboard-unified-panel .dashboard-tip-label { color: #d5dbe3 !important; }
+#root .dashboard-unified-panel .hero-kicker::before { background: #cbd2dc !important; }
+#root .dashboard-unified-panel .dashboard-hero, #root .dashboard-unified-panel .dashboard-lower,
+#root .dashboard-unified-panel .dashboard-lower .dashboard-panel + .dashboard-panel { border-color: rgba(224,230,238,.14) !important; }
+#root .dashboard-unified-panel .metric-card, #root .dashboard-unified-panel .practice-card,
+#root .dashboard-unified-panel .dashboard-tip-card, #root .dashboard-unified-panel .first-session-note {
+  border-color: rgba(224,230,238,.17) !important;
+}
+#root .dashboard-unified-panel .metric-card:hover, #root .dashboard-unified-panel .practice-card:hover,
+#root .dashboard-unified-panel .dashboard-tip-card:hover { border-color: rgba(230,234,240,.35) !important; }
+#root .dashboard-unified-panel .practice-icon, #root .dashboard-unified-panel .dashboard-tip-icon {
+  border-color: rgba(224,230,238,.19) !important;
+  background: rgba(197,206,218,.09) !important;
+}
+#root .dashboard-unified-panel .dashboard-tip-topline time, #root .dashboard-unified-panel .dashboard-tip-question,
+#root .dashboard-unified-panel .first-session-note span { color: #b5bdc8 !important; }
+#root .dashboard-unified-panel .dashboard-tip-question span, #root .dashboard-unified-panel .dashboard-tip-text,
+#root .dashboard-unified-panel .first-session-note strong { color: #e5e8ed !important; }
+#root .dashboard-unified-panel .dashboard-practice-panel .section-note { color: #aeb7c3 !important; }
+
+/* More consistent editorial contrast for profile details and selected controls. */
+#root .profile-screen .profile-level-choice,
+#root .profile-screen .profile-history-card .response-review,
+#root .profile-screen .profile-empty-history,
+#root .profile-screen .profile-field input,
+#root .profile-screen .profile-field select {
+  border-color: rgba(224,230,238,.16) !important;
+}
+#root .profile-screen .profile-level-choice { color: #e5e8ed !important; background: linear-gradient(145deg,#303741,#242a32) !important; }
+#root .profile-screen .profile-level-choice:hover,
+#root .profile-screen .profile-level-choice.is-selected,
+#root .profile-screen .profile-level-choice.is-selected:hover { border-color: rgba(224,230,238,.42) !important; background: linear-gradient(145deg,rgba(196,205,217,.2),rgba(124,136,152,.13)) !important; }
+#root .profile-screen .profile-level-icon,
+#root .profile-screen .profile-empty-history > div,
+#root .profile-screen .profile-response-chart-empty svg { border-color: rgba(224,230,238,.2) !important; color: #d5dbe3 !important; background: linear-gradient(145deg,#46505d,#303741) !important; }
+#root .profile-screen .profile-level-copy strong,
+#root .profile-screen .profile-empty-history h3,
+#root .profile-screen .response-review-summary,
+#root .profile-screen .response-review-section h3 { color: #e8ebf0 !important; }
+#root .profile-screen .profile-level-copy small,
+#root .profile-screen .profile-level-guidance,
+#root .profile-screen .profile-history-count,
+#root .profile-screen .profile-history-state,
+#root .profile-screen .profile-history-note { color: #aeb7c3 !important; }
+#root .profile-screen .profile-level-check, #root .profile-screen .profile-response-insights-heading > span,
+#root .profile-screen .profile-editor-footer > span svg { color: #cbd2dc !important; }
+#root .profile-screen .profile-level-choice.is-selected .profile-level-check { color: #f1f3f6 !important; }
+#root .profile-screen .profile-history-success { border-color: rgba(224,230,238,.18) !important; color: #dce1e8 !important; background: rgba(197,206,218,.08) !important; }
+
+/* Neutral silver accents across the remaining dashboard and profile details. */
+#root img:not(.brand-symbol) { filter: none !important; }
+#root .dashboard-unified-panel .hero-title em,
+#root .dashboard-unified-panel .hero-title em .animated-word { color: #d6dbe3 !important; }
+#root .dashboard-unified-panel .hero-title em .animated-word {
+  background-image: linear-gradient(100deg,#e4e7ec 0%,#bcc5d0 48%,#909baa 72%,#e4e7ec 100%) !important;
+  background-clip: text !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+#root .dashboard-unified-panel .hero-kicker,
+#root .dashboard-unified-panel .section-kicker,
+#root .dashboard-unified-panel .section-title,
+#root .dashboard-unified-panel .metric-icon,
+#root .dashboard-unified-panel .panel-heading svg,
+#root .dashboard-unified-panel .tip-row svg,
+#root .dashboard-unified-panel .practice-number,
+#root .dashboard-unified-panel .practice-icon,
+#root .dashboard-unified-panel .practice-arrow { color: #d2d8e0 !important; }
+#root .dashboard-unified-panel .hero-kicker::before { background: #cbd2dc !important; }
+#root .dashboard-unified-panel .preview-prompt-label { border-color: rgba(224,230,238,.18) !important; color: #e3e7ed !important; background: rgba(197,206,218,.1) !important; }
+#root .dashboard-unified-panel .preview-prompt-label svg { color: #d8dee6 !important; }
+#root .dashboard-unified-panel .waveform i { background: #cbd2dc !important; box-shadow: 0 0 9px rgba(203,210,220,.3) !important; }
+#root .dashboard-unified-panel .preview-brand-dot { background: #cbd2dc !important; box-shadow: 0 0 9px rgba(203,210,220,.3) !important; }
+#root .dashboard-unified-panel .preview-avatar { border-color: rgba(224,230,238,.28) !important; color: #dce1e8 !important; background: linear-gradient(145deg,#505a68,#303741) !important; }
+#root .dashboard-unified-panel .preview-sparkle { color: #cbd2dc !important; }
+#root .dashboard-unified-panel .practice-icon { border-color: rgba(224,230,238,.22) !important; background: rgba(197,206,218,.1) !important; }
+#root .dashboard-unified-panel .practice-card-bottom, #root .dashboard-unified-panel .practice-card-bottom span { color: #c3cad4 !important; }
+#root .dashboard-unified-panel .practice-card:hover { border-color: rgba(224,230,238,.36) !important; background: linear-gradient(145deg,#303741,#242a32) !important; }
+#root .dashboard-unified-panel .practice-card::after { border-color: rgba(224,230,238,.14) !important; }
+#root .dashboard-unified-panel .metric-card:hover { border-color: rgba(224,230,238,.36) !important; box-shadow: inset 0 1px rgba(255,255,255,.1),0 16px 28px rgba(0,0,0,.22) !important; }
+#root .dashboard-unified-panel .progress-track { border-color: rgba(224,230,238,.13) !important; background: #20252c !important; }
+#root .dashboard-unified-panel .progress-fill { background: linear-gradient(180deg,#e2e6eb,#8994a2) !important; box-shadow: 0 0 12px rgba(203,210,220,.2); }
+#root .dashboard-unified-panel .first-session-index { color: #171b21 !important; background: linear-gradient(145deg,#e2e6eb,#aeb8c5) !important; }
+
+/* Resume and secondary actions use graphite surfaces instead of the old lime CTA. */
+#root .dashboard-unified-panel .flow-primary,
+#root .dashboard-unified-panel .hero-primary,
+#root .dashboard-unified-panel .dashboard-practice-panel .hero-primary {
+  border-color: #d4dae2 !important;
+  color: #171b21 !important;
+  background: linear-gradient(110deg,#e2e6eb,#aeb8c5) !important;
+  box-shadow: 0 7px 18px rgba(0,0,0,.22) !important;
+}
+#root .dashboard-unified-panel .flow-primary:hover,
+#root .dashboard-unified-panel .hero-primary:hover { border-color: #f1f3f6 !important; background: #f1f3f6 !important; }
+#root .dashboard-unified-panel .flow-secondary,
+#root .dashboard-unified-panel .hero-secondary {
+  border-color: rgba(224,230,238,.2) !important;
+  color: #dce1e8 !important;
+  background: rgba(255,255,255,.055) !important;
+}
+#root .dashboard-unified-panel .flow-secondary:hover,
+#root .dashboard-unified-panel .hero-secondary:hover { border-color: rgba(224,230,238,.38) !important; background: rgba(255,255,255,.1) !important; }
+
+/* Profile progress fills, form badges and graph details are also monochrome. */
+#root .profile-screen .profile-metric-line { background: rgba(224,230,238,.12) !important; }
+#root .profile-screen .profile-metric-line i { background: linear-gradient(90deg,#e2e6eb,#8994a2) !important; box-shadow: 0 0 9px rgba(203,210,220,.22) !important; }
+#root .profile-screen .profile-metric-card::after { border-color: rgba(224,230,238,.12) !important; box-shadow: 0 0 0 13px rgba(224,230,238,.02),0 0 0 27px rgba(224,230,238,.012) !important; }
+#root .profile-screen .profile-heading-icon,
+#root .profile-screen .profile-saved-indicator,
+#root .profile-screen .profile-level-choice.is-selected .profile-level-icon,
+#root .profile-screen .profile-level-choice.is-selected .profile-level-check,
+#root .profile-screen .profile-editor-footer > span svg,
+#root .profile-screen .profile-response-chart-head svg,
+#root .profile-screen .profile-response-chart-head strong,
+#root .profile-screen .profile-response-chart-empty svg { border-color: rgba(224,230,238,.22) !important; color: #d5dbe3 !important; }
+#root .profile-screen .profile-heading-icon,
+#root .profile-screen .profile-level-choice.is-selected .profile-level-icon,
+#root .profile-screen .profile-response-chart-empty svg { background: linear-gradient(145deg,#48515e,#303741) !important; }
+#root .profile-screen .profile-saved-indicator { background: rgba(197,206,218,.08) !important; }
+#root .profile-screen .profile-response-insights-heading h2,
+#root .profile-screen .profile-history-heading,
+#root .profile-screen .profile-level-guidance svg,
+#root .profile-screen .response-review-score.has-score,
+#root .profile-screen .response-review-section h3 { color: #dce1e8 !important; }
+#root .profile-screen .profile-editor-footer,
+#root .profile-screen .profile-history-heading,
+#root .profile-screen .profile-response-trend { border-color: rgba(224,230,238,.14) !important; }
+
+/* Keep photo color intact while retaining each card's dark readability overlay. */
+#root .dashboard-unified-panel .metric-image img,
+#root .dashboard-unified-panel .practice-card-image img,
+#root .profile-visual-photo img,
+#root .interview-header-visual img,
+#root .results-hero-image,
+#root .auth-portal-cover > img,
+#root .setup-role-photo,
+#root .setup-person-photo { filter: saturate(1.04) contrast(1.03) !important; }
+
+/* Small accents that were still wired to the previous green theme. */
+#root .setup-unified-panel--voice .setup-selection-title .is-accent,
+#root .setup-unified-panel--text .setup-selection-title .is-accent,
+#root .setup-unified-panel--voice .setup-hero-badge-icon,
+#root .setup-unified-panel--text .setup-hero-badge-icon,
+#root .setup-unified-panel--voice .setup-hero-live-dot,
+#root .setup-unified-panel--text .setup-hero-live-dot,
+#root .setup-unified-panel--voice .setup-hero-badge > i,
+#root .setup-unified-panel--text .setup-hero-badge > i,
+#root .setup-unified-panel--voice .setup-scene-live-dot,
+#root .setup-unified-panel--text .setup-scene-live-dot,
+#root .setup-unified-panel--voice .setup-scene-spark,
+#root .setup-unified-panel--text .setup-scene-spark { color: #d5dbe3 !important; background-color: #cbd2dc !important; box-shadow: 0 0 10px rgba(203,210,220,.28) !important; text-shadow: none !important; }
+#root .setup-unified-panel--voice .setup-selection-title .is-accent,
+#root .setup-unified-panel--text .setup-selection-title .is-accent { background: none !important; }
+#root .setup-unified-panel--voice .setup-hero-badge,
+#root .setup-unified-panel--text .setup-hero-badge { border-color: rgba(224,230,238,.2) !important; color: #dce1e8 !important; background: rgba(197,206,218,.08) !important; }
+#root .setup-unified-panel--voice .setup-role-choice:hover,
+#root .setup-unified-panel--text .setup-role-choice:hover,
+#root .setup-unified-panel--voice .setup-role-choice:focus-visible,
+#root .setup-unified-panel--text .setup-role-choice:focus-visible { border-color: rgba(224,230,238,.34) !important; }
+#root .setup-unified-panel--voice .setup-role-compliment,
+#root .setup-unified-panel--text .setup-role-compliment { color: #cbd2dc !important; }
+
+#root .auth-portal { --portal-lime: #d6dbe3 !important; }
+#root .auth-portal .auth-portal-proof svg,
+#root .auth-portal .auth-portal-footer i,
+#root .auth-portal .auth-portal-interface-top > i b,
+#root .auth-portal .auth-portal-eyebrow > span { color: #d5dbe3 !important; background-color: #cbd2dc !important; }
+#root .auth-portal .auth-portal-poster h1 em,
+#root .auth-portal .auth-portal-copy h1 em { color: #d5dbe3 !important; text-shadow: 0 8px 28px rgba(0,0,0,.25) !important; }
+
+#root .dashboard-unified-panel .metric-card:hover .metric-icon,
+#root .dashboard-unified-panel .practice-card:hover .practice-icon { filter: drop-shadow(0 4px 7px rgba(203,210,220,.2)) !important; box-shadow: 0 8px 16px rgba(203,210,220,.12) !important; }
+#root .dashboard-unified-panel .preview-avatar svg { filter: drop-shadow(0 5px 7px rgba(0,0,0,.26)) !important; }
+
+/* Último barrido de color: nada de acentos verdes en las pantallas de práctica. */
+#root .setup-unified-panel--voice,
+#root .setup-unified-panel--text { --lime: #d6dbe3 !important; --em: #bdc5d0 !important; --setup-accent: #d5dbe3 !important; }
+#root .setup-unified-panel--voice .setup-role-choice,
+#root .setup-unified-panel--text .setup-role-choice { color: #e9ecf0 !important; }
+#root .setup-unified-panel--voice .setup-role-choice.is-selected,
+#root .setup-unified-panel--text .setup-role-choice.is-selected,
+#root .setup-unified-panel--voice .setup-role-choice.is-expanded,
+#root .setup-unified-panel--text .setup-role-choice.is-expanded {
+  border-color: rgba(223,229,237,.58) !important;
+  background: linear-gradient(145deg,rgba(196,205,217,.23),rgba(48,55,65,.96)) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.12),0 14px 32px rgba(0,0,0,.23) !important;
+}
+#root .setup-unified-panel--voice .setup-role-choice:hover,
+#root .setup-unified-panel--text .setup-role-choice:hover,
+#root .setup-unified-panel--voice .setup-role-choice:focus-visible,
+#root .setup-unified-panel--text .setup-role-choice:focus-visible { border-color: rgba(224,230,238,.42) !important; }
+#root .setup-unified-panel--voice .setup-role-choice .setup-choice-overline,
+#root .setup-unified-panel--text .setup-role-choice .setup-choice-overline { color: #b8c0cb !important; }
+#root .setup-unified-panel--voice .setup-role-highlights i,
+#root .setup-unified-panel--text .setup-role-highlights i,
+#root .setup-unified-panel--voice .setup-role-deck-card:hover .setup-role-highlights i,
+#root .setup-unified-panel--text .setup-role-deck-card:hover .setup-role-highlights i {
+  border-color: rgba(224,230,238,.2) !important;
+  color: #dce1e8 !important;
+  background: rgba(197,206,218,.09) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.06) !important;
+}
+#root .setup-unified-panel--voice .setup-role-art-tag,
+#root .setup-unified-panel--text .setup-role-art-tag,
+#root .setup-unified-panel--voice .setup-role-selected-art .setup-role-art-tag,
+#root .setup-unified-panel--text .setup-role-selected-art .setup-role-art-tag {
+  border-color: rgba(224,230,238,.24) !important;
+  color: #e5e8ed !important;
+  background: rgba(29,34,41,.88) !important;
+}
+#root .setup-unified-panel--voice .setup-role-photo-orbit,
+#root .setup-unified-panel--text .setup-role-photo-orbit,
+#root .setup-unified-panel--voice .setup-role-art-glow,
+#root .setup-unified-panel--text .setup-role-art-glow { border-color: rgba(216,223,232,.2) !important; box-shadow: 0 0 28px rgba(198,207,218,.08) !important; }
+#root .setup-unified-panel--voice .setup-role-choice > .setup-role-check,
+#root .setup-unified-panel--text .setup-role-choice > .setup-role-check {
+  border-color: rgba(224,230,238,.32) !important;
+  color: transparent !important;
+  background: linear-gradient(145deg,#46505d,#303741) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.1),0 4px 10px rgba(0,0,0,.24) !important;
+}
+#root .setup-unified-panel--voice .setup-role-choice.is-selected > .setup-role-check,
+#root .setup-unified-panel--text .setup-role-choice.is-selected > .setup-role-check {
+  border-color: rgba(238,241,245,.82) !important;
+  color: #171b21 !important;
+  background: linear-gradient(145deg,#f0f2f5,#aeb8c5) !important;
+}
+
+/* La escena de voz/texto conserva el color de las fotografías; sus adornos pasan a plata. */
+#root .setup-unified-panel--voice .setup-scene-grid,
+#root .setup-unified-panel--text .setup-scene-grid {
+  background-image: linear-gradient(rgba(216,223,232,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(216,223,232,.12) 1px,transparent 1px) !important;
+}
+#root .setup-unified-panel--voice .setup-scene-orbit,
+#root .setup-unified-panel--text .setup-scene-orbit,
+#root .setup-unified-panel--voice .setup-scene-orbit--inner,
+#root .setup-unified-panel--text .setup-scene-orbit--inner { border-color: rgba(216,223,232,.2) !important; }
+#root .setup-unified-panel--voice .setup-scene-person,
+#root .setup-unified-panel--text .setup-scene-person { border-color: rgba(224,230,238,.3) !important; background: #252b33 !important; box-shadow: 0 17px 35px rgba(0,0,0,.32),0 0 30px rgba(198,207,218,.07),inset 0 1px rgba(255,255,255,.24) !important; }
+#root .setup-unified-panel--voice .setup-person-photo-label i,
+#root .setup-unified-panel--text .setup-person-photo-label i { background: #cbd2dc !important; box-shadow: 0 0 8px rgba(203,210,220,.4) !important; }
+#root .setup-unified-panel--voice .setup-device-screen,
+#root .setup-unified-panel--text .setup-device-screen { border-color: rgba(224,230,238,.32) !important; background: linear-gradient(145deg,#252b33,#11161c) !important; }
+#root .setup-unified-panel--voice .setup-device-topbar i,
+#root .setup-unified-panel--text .setup-device-topbar i { background: #8792a0 !important; }
+#root .setup-unified-panel--voice .setup-ai-orb,
+#root .setup-unified-panel--text .setup-ai-orb {
+  border-color: rgba(224,230,238,.42) !important;
+  color: #222831 !important;
+  background: radial-gradient(circle at 34% 25%,#f0f2f5,#b9c2ce 62%,#84909f) !important;
+  box-shadow: 0 0 27px rgba(198,207,218,.18),inset 0 2px 4px rgba(255,255,255,.56) !important;
+}
+#root .setup-unified-panel--voice .setup-device-chat > span,
+#root .setup-unified-panel--text .setup-device-chat > span { color: #cbd2dc !important; }
+#root .setup-unified-panel--voice .setup-device-wave i,
+#root .setup-unified-panel--text .setup-device-wave i,
+#root .setup-unified-panel--voice .setup-device-lines i,
+#root .setup-unified-panel--text .setup-device-lines i,
+#root .setup-unified-panel--voice .setup-bubble-wave i,
+#root .setup-unified-panel--text .setup-bubble-wave i { background: #cbd2dc !important; box-shadow: 0 0 8px rgba(203,210,220,.2) !important; }
+#root .setup-unified-panel--voice .setup-device-base,
+#root .setup-unified-panel--text .setup-device-base,
+#root .setup-unified-panel--voice .setup-device-keyboard,
+#root .setup-unified-panel--text .setup-device-keyboard { border-color: rgba(224,230,238,.17) !important; background: linear-gradient(180deg,#7e8997,#343b45) !important; }
+#root .setup-unified-panel--voice .setup-scene-bubble,
+#root .setup-unified-panel--text .setup-scene-bubble,
+#root .setup-unified-panel--voice .setup-scene-bubble--text,
+#root .setup-unified-panel--text .setup-scene-bubble--text { border-color: rgba(224,230,238,.24) !important; color: #e6e9ee !important; background: rgba(55,62,72,.78) !important; }
+#root .setup-unified-panel--voice .setup-scene-bubble > svg,
+#root .setup-unified-panel--text .setup-scene-bubble > svg { color: #d5dbe3 !important; }
+#root .setup-unified-panel--voice .setup-scene-spark,
+#root .setup-unified-panel--text .setup-scene-spark { color: #d5dbe3 !important; filter: drop-shadow(0 0 9px rgba(198,207,218,.34)) !important; }
+#root .setup-unified-panel--voice .setup-scene-caption,
+#root .setup-unified-panel--text .setup-scene-caption { color: #c1c8d2 !important; }
+#root .setup-unified-panel--voice .setup-scene-live-dot,
+#root .setup-unified-panel--text .setup-scene-live-dot { background: #cbd2dc !important; box-shadow: 0 0 8px rgba(203,210,220,.36) !important; }
+#root .setup-unified-panel--text .setup-writing-card {
+  border-color: rgba(224,230,238,.26) !important;
+  color: #e7eaf0 !important;
+  background: linear-gradient(145deg,rgba(53,60,70,.97),rgba(29,34,41,.98)) !important;
+  box-shadow: 0 20px 42px rgba(0,0,0,.32),inset 0 1px rgba(255,255,255,.11) !important;
+}
+#root .setup-unified-panel--text .setup-writing-card-head,
+#root .setup-unified-panel--text .setup-writing-card-head span,
+#root .setup-unified-panel--text .setup-writing-card-head svg,
+#root .setup-unified-panel--text .setup-writing-card-head > i,
+#root .setup-unified-panel--text .setup-writing-check,
+#root .setup-unified-panel--text .setup-writing-check svg { border-color: rgba(224,230,238,.2) !important; color: #d5dbe3 !important; background-color: rgba(197,206,218,.1) !important; }
+#root .setup-unified-panel--text .setup-writing-card small { color: #b4bdc9 !important; }
+#root .setup-unified-panel--text .setup-writing-lines i { background: rgba(216,223,232,.52) !important; }
+
+/* La miniatura de perfil usa los mismos indicadores neutros, sin alterar su foto. */
+#root .profile-visual-card-top i,
+#root .profile-visual-avatar i,
+#root .profile-visual-tag-dot { background: #cbd2dc !important; box-shadow: 0 0 8px rgba(203,210,220,.3) !important; }
+#root .profile-visual-avatar { border-color: rgba(224,230,238,.4) !important; color: #20252c !important; background: linear-gradient(145deg,#e2e6eb,#9ca7b5) !important; box-shadow: 0 5px 12px rgba(0,0,0,.22) !important; }
+#root .profile-visual-award { border-color: rgba(224,230,238,.2) !important; color: #d5dbe3 !important; background: rgba(197,206,218,.1) !important; }
+#root .profile-visual-chart-head span svg,
+#root .profile-visual-chart-head strong,
+#root .profile-visual-sparkle { color: #d5dbe3 !important; filter: drop-shadow(0 0 8px rgba(198,207,218,.22)) !important; }
+#root .profile-visual-chart i,
+#root .profile-visual-chart i:nth-child(3n) { background: linear-gradient(180deg,#e1e5eb,#778392) !important; box-shadow: 0 2px 6px rgba(0,0,0,.16) !important; }
+#root .profile-visual-tag-dot { background: #cbd2dc !important; }
+
+/* Remapea utilidades semánticas heredadas en entrevista, avisos y resultados. */
+#root :is([class*="text-green-"],[class*="text-emerald-"],[class*="text-teal-"],[class*="text-cyan-"],[class*="text-lime-"],[class*="text-amber-"],[class*="text-yellow-"],[class*="text-orange-"]) { color: #cbd2dc !important; }
+#root :is([class*="bg-green-"],[class*="bg-emerald-"],[class*="bg-teal-"],[class*="bg-cyan-"],[class*="bg-lime-"],[class*="bg-amber-"],[class*="bg-yellow-"],[class*="bg-orange-"]) {
+  border-color: rgba(224,230,238,.16) !important;
+  color: #dce1e8 !important;
+  background-color: rgba(197,206,218,.075) !important;
+  background-image: linear-gradient(135deg,rgba(197,206,218,.09),rgba(197,206,218,.025)) !important;
+}
+#root :is([class*="border-green-"],[class*="border-emerald-"],[class*="border-teal-"],[class*="border-cyan-"],[class*="border-lime-"],[class*="border-amber-"],[class*="border-yellow-"],[class*="border-orange-"]) { border-color: rgba(224,230,238,.16) !important; }
+#root :is([class*="from-green-"],[class*="to-green-"],[class*="from-emerald-"],[class*="to-emerald-"],[class*="from-teal-"],[class*="to-teal-"],[class*="from-cyan-"],[class*="to-cyan-"],[class*="from-lime-"],[class*="to-lime-"],[class*="from-amber-"],[class*="to-amber-"],[class*="from-orange-"],[class*="to-orange-"]) { --tw-gradient-from: #dce1e8 !important; --tw-gradient-to: #98a3b1 !important; --tw-gradient-stops: var(--tw-gradient-from),var(--tw-gradient-to) !important; }
+#root svg { color: inherit; }
+
+/* Controles que usan gradientes propios y no dependían de las variables globales. */
+#root .setup-hero-badge-icon { border-color: rgba(224,230,238,.38) !important; color: #20252c !important; background: linear-gradient(145deg,#f0f2f5,#aeb8c5) !important; box-shadow: 0 3px 11px rgba(0,0,0,.22) !important; }
+#root .setup-hero-badge > i,
+#root .setup-hero-live-dot,
+#root .setup-console-status b { background: #cbd2dc !important; box-shadow: 0 0 9px rgba(203,210,220,.32) !important; }
+#root .setup-console-status { color: #cbd2dc !important; }
+#root .setup-count-visual,
+#root .setup-workspace--role-selected .setup-type-icon { border-color: rgba(224,230,238,.24) !important; color: #d5dbe3 !important; background: linear-gradient(145deg,#46505d,#303741) !important; box-shadow: inset 0 1px rgba(255,255,255,.1),0 5px 11px rgba(0,0,0,.2) !important; }
+#root .setup-count-choice.is-selected .setup-count-visual,
+#root .setup-workspace--role-selected .setup-type-choice.is-selected .setup-type-icon { border-color: rgba(238,241,245,.74) !important; color: #20252c !important; background: linear-gradient(145deg,#f0f2f5,#aeb8c5) !important; box-shadow: inset 0 1px #fff,0 7px 14px rgba(0,0,0,.22) !important; }
+#root .setup-count-track { background: rgba(224,230,238,.12) !important; }
+#root .setup-count-track i { background: linear-gradient(90deg,#e2e6eb,#8994a2) !important; box-shadow: 0 0 8px rgba(203,210,220,.18) !important; }
+#root .setup-type-image::after,
+#root .setup-count-image::after { background: linear-gradient(90deg,rgba(34,40,48,.96),rgba(34,40,48,.08)) !important; }
+#root .setup-type-choice.is-selected .setup-type-image::after,
+#root .setup-count-choice.is-selected .setup-count-image::after { background: linear-gradient(90deg,rgba(42,49,58,.94),rgba(42,49,58,.08)) !important; }
+#root .setup-selection-title .is-accent { color: #d5dbe3 !important; background: none !important; -webkit-text-fill-color: #d5dbe3 !important; }
+
+/* La capa visual del perfil también usa plata, manteniendo la fotografía en color. */
+#root .profile-visual-grid { background-image: linear-gradient(rgba(216,223,232,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(216,223,232,.12) 1px,transparent 1px) !important; }
+#root .profile-visual-orbit,
+#root .profile-visual-orbit--two { border-color: rgba(216,223,232,.18) !important; }
+#root .profile-visual-photo { border-color: rgba(224,230,238,.2) !important; background: #20252c !important; }
+#root .profile-visual-photo::after { background: linear-gradient(90deg,rgba(18,22,28,.48),rgba(18,22,28,.08) 70%),linear-gradient(0deg,rgba(18,22,28,.34),transparent 75%) !important; }
+#root .profile-visual-photo img { opacity: .78 !important; filter: saturate(1.04) contrast(1.03) !important; }
+
+/* Inicio de sesión y registro: también se eliminan los últimos acentos oliva. */
+#root .auth-portal-floating-icon { border: 1px solid rgba(224,230,238,.28) !important; color: #20252c !important; background: linear-gradient(145deg,#f0f2f5,#aeb8c5) !important; }
+#root .auth-portal-floating--score > i { border-color: rgba(224,230,238,.24) !important; color: #d5dbe3 !important; }
+#root .auth-portal-floating--play svg,
+#root .auth-portal-visual-caption svg,
+#root .auth-portal-panel-top > span svg,
+#root .auth-portal-privacy svg { color: #d5dbe3 !important; }
+#root .auth-portal-header-actions button:hover { border-color: rgba(224,230,238,.5) !important; color: #f5f6f8 !important; background: rgba(197,206,218,.16) !important; box-shadow: 0 10px 28px rgba(0,0,0,.2),0 0 22px rgba(197,206,218,.12),inset 0 1px rgba(255,255,255,.16) !important; }
+#root .auth-portal-form .auth-input:focus { border-color: rgba(216,223,232,.62) !important; box-shadow: 0 0 0 3px rgba(198,207,218,.13) !important; }
+#root .auth-portal-form-heading > p,
+#root .auth-portal-panel-top > span,
+#root .auth-portal-form .auth-switch a,
+#root .auth-portal-panel .auth-switch a { color: #d0d6df !important; }
+#root .auth-portal-form .auth-submit { color: #171b21 !important; background: linear-gradient(120deg,#e4e7ec,#b7c0cc) !important; box-shadow: 0 9px 24px rgba(0,0,0,.2) !important; }
+#root .auth-portal-form .auth-submit:hover { background: #f3f4f6 !important; }
+

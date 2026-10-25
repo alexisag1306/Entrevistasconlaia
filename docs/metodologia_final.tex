@@ -1,0 +1,401 @@
+% =====================================================================
+% SECCIÓN: METODOLOGÍA
+% Simulador de Entrevistas de Trabajo — ISC
+% Instituto Tecnológico Superior de San Pedro de las Colonias
+% =====================================================================
+
+\section{Metodología}
+
+% ---------------------------------------------------------------------
+\subsection{Análisis de requerimientos}
+% Cronograma: 31 ago – 13 sep
+
+Para el desarrollo del simulador se identificaron los requerimientos
+funcionales y no funcionales del sistema a partir de los objetivos
+planteados en el protocolo de investigación.
+
+\subsubsection{Requerimientos funcionales}
+
+Los requerimientos funcionales describen las acciones que el sistema
+debe ser capaz de realizar:
+
+\begin{enumerate}
+    \item El sistema debe permitir al usuario crear una cuenta e
+    iniciar sesión con correo electrónico y contraseña.
+
+    \item El sistema debe permitir al usuario configurar su sesión
+    de práctica eligiendo el área técnica de enfoque, el tipo de
+    preguntas y la cantidad a responder.
+
+    \item El sistema debe seleccionar y presentar preguntas de
+    entrevista de forma ordenada por fases, respetando el flujo
+    natural de una entrevista real: apertura, preguntas conductuales,
+    preguntas técnicas y cierre.
+
+    \item El sistema debe permitir al usuario responder las preguntas
+    de dos formas: escribiendo su respuesta o respondiendo por voz.
+
+    \item El sistema debe enviar cada respuesta a un modelo de
+    inteligencia artificial y mostrar al usuario una evaluación
+    con puntuación, fortalezas, áreas de mejora, un consejo
+    específico y un ejemplo de respuesta ideal.
+
+    \item El sistema debe guardar el historial de sesiones y
+    respuestas de cada usuario para su consulta posterior.
+
+    \item El sistema debe mostrar estadísticas de progreso al usuario:
+    sesiones realizadas, preguntas respondidas y puntuación promedio.
+
+    \item Al finalizar cada sesión, el sistema debe mostrar una
+    pantalla de resultados con la puntuación general, la mejor y
+    peor respuesta de la sesión, y un consejo global generado por
+    la inteligencia artificial.
+\end{enumerate}
+
+\subsubsection{Requerimientos no funcionales}
+
+Los requerimientos no funcionales describen las condiciones bajo las
+cuales el sistema debe operar:
+
+\begin{enumerate}
+    \item El simulador debe funcionar desde un navegador web sin
+    necesidad de instalar ningún programa adicional.
+
+    \item La interfaz debe estar completamente en español y orientada
+    al contexto del mercado laboral mexicano en el sector tecnológico.
+
+    \item El sistema debe ser accesible desde los equipos del
+    laboratorio de sistemas del ITSPC con conexión a internet.
+
+    \item El tiempo de respuesta de la evaluación por inteligencia
+    artificial no debe superar los cinco segundos en condiciones
+    normales de conexión.
+
+    \item El sistema debe proteger los datos de cada usuario de forma
+    que ningún participante pueda acceder a la información de otro.
+
+    \item En caso de fallo del servicio de inteligencia artificial,
+    el sistema debe continuar funcionando con una evaluación básica
+    para no interrumpir la sesión del usuario.
+
+    \item El sistema debe evitar mostrar preguntas que el usuario
+    ya haya respondido en sesiones recientes, garantizando variedad
+    en la práctica.
+\end{enumerate}
+
+\subsubsection{Recursos tecnológicos}
+
+Para cumplir con los requerimientos anteriores se seleccionaron las
+siguientes herramientas y tecnologías:
+
+\begin{itemize}
+    \item \textbf{TypeScript:} Lenguaje de programación principal
+    del proyecto, basado en JavaScript con tipado estático.
+
+    \item \textbf{React:} Biblioteca utilizada para construir la
+    interfaz de usuario del simulador.
+
+    \item \textbf{Tailwind CSS:} Se empleó para los estilos visuales
+    y el diseño responsivo de la aplicación.
+
+    \item \textbf{Supabase:} Base de datos en la nube (PostgreSQL)
+    que almacenó los usuarios, las sesiones de práctica y las
+    respuestas. También gestionó el inicio de sesión y el registro
+    de usuarios mediante autenticación con correo y contraseña.
+
+    \item \textbf{Google Gemini API:} Modelo de lenguaje de gran
+    escala utilizado para evaluar las respuestas del candidato y
+    generar retroalimentación personalizada en tiempo real.
+
+    \item \textbf{Web Speech API:} Tecnología nativa del navegador
+    que permitió capturar la voz del usuario y convertirla en texto
+    para el modo de entrevista por voz. No requirió instalación ni
+    costo adicional.
+
+    \item \textbf{Bolt (bolt.new):} Plataforma utilizada para generar
+    el prototipo funcional inicial del simulador a partir de una
+    descripción en lenguaje natural.
+
+    \item \textbf{Kiro IDE:} Entorno de desarrollo con agente de
+    inteligencia artificial donde se desarrolló, refinó y depuró
+    el código del proyecto.
+\end{itemize}
+
+Para la construcción del banco de preguntas se revisaron plataformas
+especializadas en entrevistas de trabajo del sector tecnológico,
+entre ellas: DataCamp, FinalRoundAI, ResuFit, InterviewPrep.org,
+TestGorilla, igotanoffer y Primly.io. El resultado fue un banco de
+70 preguntas curadas en español, organizadas por tipo y nivel de
+dificultad, orientadas al perfil de egreso de Ingeniería en Sistemas
+Computacionales.
+
+% ---------------------------------------------------------------------
+\subsection{Diseño funcional}
+% Cronograma: 7 sep – 20 sep
+
+El diseño del simulador abarcó dos aspectos principales: la estructura
+de la base de datos y el diseño de la interfaz de usuario.
+
+\subsubsection{Diseño de la base de datos}
+
+Con base en los requerimientos identificados, se diseñó el esquema
+de la base de datos en Supabase utilizando PostgreSQL. Se definieron
+cuatro tablas principales:
+
+\begin{itemize}
+    \item \textbf{profiles:} En esta tabla se almacenó la información
+    personal de cada usuario registrado, como el nombre completo,
+    el área profesional de interés y el nivel de experiencia.
+
+    \item \textbf{interview\_questions:} Aquí se almacenaron las
+    70 preguntas del banco, cada una clasificada por fase (apertura,
+    conductual, técnica o cierre), área técnica (general, web,
+    backend o bases de datos), nivel de dificultad y criterios de
+    respuesta ideal utilizados por la inteligencia artificial.
+
+    \item \textbf{interview\_sessions:} En esta tabla se registró
+    cada sesión de práctica iniciada por un usuario, guardando el
+    modo de interacción elegido, el área técnica, el tipo de sesión
+    y la cantidad de preguntas respondidas.
+
+    \item \textbf{session\_responses:} Aquí se guardaron las
+    respuestas del usuario por cada pregunta respondida, junto con
+    la puntuación, la retroalimentación y el consejo de mejora
+    generados por la inteligencia artificial.
+\end{itemize}
+
+\subsubsection{Diseño de la interfaz}
+
+El diseño de la interfaz se realizó inicialmente con Bolt, que generó
+las pantallas principales del simulador. Posteriormente se refinó en
+Kiro IDE, ajustando la distribución de elementos, la paleta de
+colores y la experiencia de usuario. El simulador se compone de
+ocho pantallas principales:
+
+\paragraph{Inicio de sesión y registro.}
+Es la primera pantalla que ve el usuario al entrar al simulador.
+Desde aquí puede crear una cuenta nueva ingresando su nombre, correo
+y contraseña, o iniciar sesión si ya tiene una cuenta registrada.
+Incluye un indicador visual de fortaleza de contraseña durante
+el registro.
+
+\paragraph{Dashboard.}
+Es la pantalla principal del simulador. Muestra el nombre del usuario,
+un resumen de su progreso (sesiones realizadas, preguntas respondidas
+y puntuación promedio), una gráfica de barras con la evolución de
+su puntuación por sesión y los últimos consejos recibidos de la
+inteligencia artificial. Desde aquí el usuario elige si quiere
+practicar con el modo de entrevista por voz o por texto.
+
+\paragraph{Configuración de sesión.}
+Antes de iniciar una entrevista, el usuario personaliza su sesión
+en esta pantalla. Elige el área técnica en la que quiere enfocarse
+(General ISC, Desarrollo Web, Backend o Bases de Datos), el tipo de
+preguntas que desea practicar (técnicas, conductuales o mixtas) y
+cuántas preguntas quiere responder (5, 10 o 15). Al final se muestra
+un resumen de lo seleccionado antes de comenzar.
+
+\paragraph{Entrevista por texto.}
+En esta pantalla aparece una pregunta a la vez con su categoría,
+nivel de dificultad y fase. El usuario escribe su respuesta en el
+área de texto disponible y la envía para ser evaluada. Se muestra
+un contador de palabras en tiempo real y una barra de progreso que
+indica el avance dentro de la sesión.
+
+\paragraph{Entrevista por voz.}
+Funciona igual que la entrevista por texto, pero en lugar de
+escribir, el usuario responde hablando. Al presionar el botón del
+micrófono comienza la grabación con un indicador visual animado y
+la transcripción aparece en pantalla en tiempo real. Cuando el
+usuario termina, la respuesta transcrita se envía automáticamente
+para su evaluación.
+
+\paragraph{Retroalimentación.}
+Después de evaluar cada respuesta, el simulador muestra los resultados
+en esta pantalla. El usuario puede ver la puntuación obtenida del 1
+al 10, las fortalezas de su respuesta, las áreas de mejora, un
+consejo puntual y un ejemplo de cómo se vería una respuesta ideal.
+Al terminar puede continuar con la siguiente pregunta o finalizar
+la sesión.
+
+\paragraph{Resultados de sesión.}
+Al finalizar la sesión completa, se muestra una pantalla de resumen
+con la puntuación promedio obtenida, la pregunta donde el usuario
+respondió mejor, la pregunta donde tuvo más dificultad, el detalle
+de puntuación por cada pregunta respondida y un consejo general
+generado por la inteligencia artificial con base en el desempeño
+de toda la sesión.
+
+\paragraph{Perfil.}
+Aquí el usuario puede actualizar su información personal como el
+nombre, el área profesional y su nivel de experiencia. También puede
+consultar el historial completo de sus respuestas anteriores con la
+fecha, la puntuación y la retroalimentación recibida en cada sesión.
+
+% ---------------------------------------------------------------------
+\subsection{Desarrollo del simulador web}
+% Cronograma: 14 sep – 4 oct
+
+El desarrollo se llevó a cabo en Kiro IDE sobre el código base
+generado por Bolt. Se implementaron los siguientes módulos:
+
+\subsubsection{Autenticación y gestión de usuarios}
+
+Se implementó el registro e inicio de sesión con correo y contraseña
+mediante Supabase. Al momento del registro se creó automáticamente
+un perfil en la base de datos con los datos del usuario. La sesión
+se mantuvo activa entre visitas mediante tokens almacenados en el
+navegador. Se agregó validación de fortaleza de contraseña en tiempo
+real durante el registro.
+
+\subsubsection{Configuración de sesión}
+
+Se desarrolló la pantalla de configuración que apareció antes de
+iniciar cada entrevista. El usuario seleccionó el área técnica de
+su interés, el tipo de preguntas y la cantidad. Estas preferencias
+se guardaron en la base de datos al iniciar la sesión y se utilizaron
+para filtrar el banco de preguntas.
+
+\subsubsection{Selección de preguntas por fases}
+
+Se implementó un algoritmo que distribuyó las preguntas respetando
+el orden natural de una entrevista real: una pregunta de apertura
+al inicio, preguntas conductuales o técnicas en el cuerpo de la
+sesión según el tipo elegido, y una pregunta de cierre al final.
+Dentro de cada fase la selección fue aleatoria, garantizando variedad
+entre sesiones. Adicionalmente, el algoritmo verificó el historial
+reciente del usuario para evitar repetir preguntas ya respondidas
+en las últimas sesiones, priorizando siempre preguntas nuevas.
+
+\subsubsection{Módulo de entrevista por texto}
+
+Se desarrolló la pantalla de entrevista por texto que presentó cada
+pregunta con su categoría, nivel de dificultad y fase. El usuario
+escribió su respuesta y la envió para su evaluación. Se mostró un
+contador de palabras en tiempo real y una barra de progreso con el
+avance de la sesión. Se implementó una confirmación antes de
+abandonar la sesión para evitar pérdida accidental del progreso.
+
+\subsubsection{Módulo de entrevista por voz}
+
+Se implementó la entrevista por voz utilizando la Web Speech API
+del navegador, configurada en español. Al presionar el botón del
+micrófono se inició la grabación con un indicador visual de ondas
+concéntricas animadas y un contador de tiempo. La transcripción
+apareció en pantalla en tiempo real. Al detener la grabación, el
+texto transcrito se envió automáticamente a evaluación. Se agregó
+un aviso visible al inicio de cada pregunta recomendando al usuario
+estar en un lugar silencioso para mejorar la precisión de la
+transcripción.
+
+% ---------------------------------------------------------------------
+\subsection{Conexión con IA y sistema de voz}
+% Cronograma: 21 sep – 4 oct
+
+\subsubsection{Integración con Google Gemini API}
+
+Se desarrolló el módulo de evaluación que integró Google Gemini
+(modelo \textit{gemini-3.5-flash}) como motor de retroalimentación.
+Para cada respuesta se construyó un prompt contextualizado que
+incluyó los siguientes elementos:
+
+\begin{itemize}
+    \item La pregunta y los criterios de una respuesta ideal.
+    \item La fase y categoría de la pregunta (apertura, conductual,
+    técnica o cierre).
+    \item El área técnica y el nivel de experiencia del candidato.
+    \item El modo de respuesta (escrita o por voz).
+    \item El tiempo que tardó el usuario en responder.
+    \item El historial de preguntas y puntuaciones previas dentro
+    de la misma sesión, para que la inteligencia artificial pudiera
+    detectar patrones de mejora o declive.
+    \item Detección automática de muletillas en respuestas por voz
+    (palabras como ``este'', ``o sea'', ``pues'', ``um'').
+\end{itemize}
+
+Google Gemini devolvió una evaluación estructurada en formato JSON
+con los siguientes campos: puntuación del 1 al 10, fortalezas de
+la respuesta, áreas de mejora, un consejo específico para esa
+pregunta y un ejemplo de cómo comenzaría una respuesta ideal. Esta
+información se almacenó en la base de datos y se presentó al usuario
+al finalizar cada pregunta.
+
+Se implementaron medidas de seguridad sobre el módulo de IA:
+sanitización de las respuestas del usuario antes de enviarlas al
+modelo para prevenir inyecciones de prompt, límite de longitud de
+3{,}000 caracteres por respuesta y un tiempo máximo de espera de 15
+segundos para la llamada a la API. En caso de fallo del servicio,
+el módulo activó automáticamente un sistema de respaldo con
+evaluación básica local para no interrumpir la sesión del usuario.
+
+\subsubsection{Pantalla de resultados de sesión}
+
+Al finalizar cada sesión se implementó una pantalla de resultados
+que mostró: la puntuación promedio de la sesión con indicador visual
+de desempeño, la pregunta con mayor puntuación, la pregunta con
+menor puntuación, el detalle numérico de cada pregunta respondida
+y un consejo general generado por Google Gemini analizando el
+patrón de respuestas de toda la sesión.
+
+\subsubsection{Gráfica de progreso}
+
+Se implementó una gráfica de barras en el dashboard que mostró la
+evolución de la puntuación promedio del usuario a lo largo de sus
+sesiones. La gráfica apareció automáticamente cuando el usuario
+completó dos o más sesiones, con un indicador textual de tendencia
+(mejorando, en declive o estable).
+
+% ---------------------------------------------------------------------
+\subsection{Pruebas y correcciones}
+% Cronograma: 28 sep – 11 oct
+
+Durante esta fase se realizaron pruebas funcionales del simulador
+para identificar y corregir errores antes de la intervención con
+los participantes. Las pruebas abarcaron los siguientes aspectos:
+
+\subsubsection{Pruebas funcionales}
+
+Se verificó el correcto funcionamiento de cada módulo del simulador:
+registro e inicio de sesión, configuración de sesión, carga y
+filtrado de preguntas, envío de respuestas, recepción y visualización
+del feedback de la inteligencia artificial, pantalla de resultados
+y consulta del historial en el perfil del usuario.
+
+\subsubsection{Correcciones implementadas}
+
+A partir de las pruebas se identificaron y corrigieron los siguientes
+problemas:
+
+\begin{itemize}
+    \item Se corrigió un error en los enlaces del menú de navegación
+    que permitía iniciar una entrevista sin pasar por la pantalla
+    de configuración.
+
+    \item Se agregó manejo de errores en el guardado del perfil
+    del usuario, cambiando la operación de actualización por una
+    operación de inserción o actualización (\textit{upsert}) para
+    garantizar que los datos se guardaran correctamente en todos
+    los casos.
+
+    \item Se corrigió un error de tipado en el componente de perfil
+    que impedía compilar el proyecto correctamente.
+
+    \item Se implementó la confirmación antes de abandonar una
+    entrevista en curso para evitar pérdida accidental de respuestas.
+
+    \item Se verificó la conexión con la base de datos de Supabase
+    y se validó que las políticas de seguridad por filas (RLS)
+    funcionaran correctamente para cada usuario.
+\end{itemize}
+
+\subsubsection{Pruebas de usabilidad preliminares}
+
+Se realizaron pruebas preliminares de uso por parte de los propios
+desarrolladores para validar el flujo completo de una sesión de
+práctica, desde el registro hasta la visualización de resultados,
+tanto en el modo de entrevista por texto como en el modo por voz.
+Se verificó el funcionamiento en los navegadores Google Chrome y
+Microsoft Edge, que son los disponibles en los equipos del
+laboratorio del ITSPC.
+
+\end{document}

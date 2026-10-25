@@ -1,0 +1,279 @@
+/* Ajustes terminales para títulos y acentos residuales de la configuración. */
+#root .setup-area-back-button {
+  border-color: rgba(216,223,232,.3) !important;
+  color: #d5dbe3 !important;
+  background: linear-gradient(145deg,rgba(216,223,232,.13),rgba(157,168,183,.07)) !important;
+}
+#root .setup-area-back-button:hover {
+  border-color: rgba(216,223,232,.56) !important;
+  color: #f3f4f6 !important;
+  background: rgba(216,223,232,.17) !important;
+}
+#root .setup-role-stage-praise,
+#root .setup-role-stage-praise strong,
+#root .setup-role-stage-praise svg { color: #c1c8d2 !important; }
+#root .setup-unified-panel .setup-hero-title em .animated-word {
+  color: #cbd2dc !important;
+  background: none !important;
+  background-image: none !important;
+  background-clip: initial !important;
+  -webkit-background-clip: initial !important;
+  -webkit-text-fill-color: #cbd2dc !important;
+  text-shadow: none !important;
+}
+
+/* Última pasada de neutralización: ambiente global y detalles residuales del perfil. */
+#root .app-layout.scene-bg {
+  background-image:
+    radial-gradient(ellipse 48% 42% at 12% 12%,rgba(255,255,255,.28),transparent 82%),
+    radial-gradient(ellipse 44% 48% at 88% 80%,rgba(164,178,198,.14),transparent 78%),
+    repeating-linear-gradient(132deg,transparent 0 56px,rgba(220,225,232,.025) 57px 58px) !important;
+  background-color: #171b21 !important;
+}
+#root .app-layout::before {
+  background: radial-gradient(circle,rgba(178,190,208,.2) 0%,rgba(178,190,208,.075) 40%,transparent 71%) !important;
+}
+#root .app-layout::after {
+  background: radial-gradient(circle,rgba(145,158,178,.15) 0%,rgba(145,158,178,.055) 44%,transparent 73%) !important;
+}
+#root .profile-hero {
+  background: radial-gradient(ellipse at 17% 90%,rgba(185,198,216,.07),transparent 32rem),transparent !important;
+}
+#root .profile-screen .profile-level-heading > span {
+  border-color: rgba(224,230,238,.18) !important;
+  color: #d5dbe3 !important;
+  background: rgba(197,206,218,.1) !important;
+}
+#root .profile-screen .response-review-index,
+#root .profile-screen .response-review-score,
+#root .profile-screen .response-review-chevron { color: #aeb7c3 !important; }
+#root .profile-screen .response-review-score.has-score { color: #dce1e8 !important; }
+#root .profile-screen .profile-metric-detail,
+#root .profile-screen .profile-field-control,
+#root .profile-screen .profile-field-control svg,
+#root .profile-screen .profile-response-chart-empty,
+#root .profile-screen .profile-response-chart-empty span,
+#root .profile-screen .profile-visual-person-copy > span { color: #aeb7c3 !important; }
+#root .profile-screen .profile-visual-float-tag {
+  border-color: rgba(224,230,238,.18) !important;
+  color: #dce1e8 !important;
+  background: rgba(31,36,44,.82) !important;
+}
+/* Jerarquía tipográfica y movimiento editorial para el perfil. */
+#root .profile-screen .profile-hero-title-line {
+  display: block;
+  max-width: 100%;
+  transform-origin: 50% 100%;
+  backface-visibility: hidden;
+  will-change: transform,opacity,filter;
+}
+#root .profile-screen .profile-hero-title-line--accent {
+  color: #cbd2dc !important;
+  background: none !important;
+  -webkit-text-fill-color: #cbd2dc !important;
+  text-shadow: 0 1px 0 rgba(255,255,255,.28),0 2px 0 rgba(130,142,159,.42),0 8px 24px rgba(0,0,0,.24) !important;
+}
+#root .profile-screen .profile-section-heading h2,
+#root .profile-screen .profile-response-insights-heading h2,
+#root .profile-screen .profile-history-heading h2 {
+  letter-spacing: -.045em;
+  text-wrap: balance;
+}
+#root .profile-screen .profile-metric-card {
+  transition: border-color .3s ease,box-shadow .3s ease,background-position .8s ease !important;
+}
+#root .profile-screen .profile-metric-card:hover {
+  border-color: rgba(216,223,232,.42) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.1),0 17px 30px rgba(0,0,0,.2),0 0 22px rgba(198,207,218,.1) !important;
+}
+#root .setup-unified-panel--voice .setup-selection-title .is-accent,
+#root .setup-unified-panel--text .setup-selection-title .is-accent {
+  color: #d5dbe3 !important;
+  background: none !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  -webkit-text-fill-color: #d5dbe3 !important;
+}
+/* Más carácter e interacción para los bloques del perfil. */
+#root .profile-screen .profile-response-insights {
+  min-width: 0;
+  padding: 20px clamp(16px,2vw,24px);
+  overflow: hidden;
+  border: 1px solid rgba(216,223,232,.14) !important;
+  border-radius: 18px;
+  background: radial-gradient(ellipse at 88% 0%,rgba(174,187,205,.12),transparent 62%),linear-gradient(145deg,rgba(47,55,66,.55),rgba(27,32,39,.62)) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.045),0 15px 30px rgba(0,0,0,.12);
+}
+#root .profile-screen .profile-response-insights-heading h2 {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  font-size: clamp(19px,1.7vw,23px);
+}
+#root .profile-screen .profile-response-insights-heading p { max-width: 38ch; }
+#root .profile-screen .profile-response-chart-empty {
+  display: grid;
+  min-height: 0;
+  gap: 8px;
+  padding: 8px 0 2px;
+}
+#root .profile-screen .profile-empty-chart-art {
+  display: block;
+  width: 100%;
+  height: 82px;
+  overflow: visible;
+}
+#root .profile-screen .profile-empty-chart-grid {
+  stroke: rgba(216,223,232,.11);
+  stroke-dasharray: 2 6;
+  stroke-width: 1;
+}
+#root .profile-screen .profile-empty-chart-path {
+  stroke: #cbd2dc;
+  stroke-dasharray: 5 7;
+  stroke-linecap: round;
+  stroke-width: 2;
+  filter: drop-shadow(0 0 5px rgba(203,210,220,.22));
+  animation: profileEmptyPath 8s linear infinite;
+}
+#root .profile-screen .profile-empty-chart-point {
+  fill: #aeb8c5;
+  animation: profileEmptyPoint 2.8s ease-in-out infinite;
+}
+#root .profile-screen .profile-empty-chart-point:nth-of-type(2) { animation-delay: .6s; }
+#root .profile-screen .profile-empty-chart-point:nth-of-type(3) { animation-delay: 1.2s; }
+#root .profile-screen .profile-empty-chart-end {
+  fill: #e2e6eb;
+  filter: drop-shadow(0 0 5px rgba(226,230,235,.6));
+  animation: profileEmptyPoint 2s ease-in-out infinite;
+}
+#root .profile-screen .profile-empty-chart-copy { display: grid; gap: 4px; }
+#root .profile-screen .profile-empty-chart-copy strong { color: #e2e6eb; font-size: 10px; }
+#root .profile-screen .profile-empty-chart-copy span { color: #aeb7c3; font-size: 9px; line-height: 1.55; }
+#root .profile-screen .profile-field-control {
+  position: relative;
+  overflow: hidden;
+  transition: border-color .28s ease,background .28s ease,box-shadow .28s ease,transform .28s ease !important;
+}
+#root .profile-screen .profile-field-control::after {
+  position: absolute;
+  right: 15px;
+  bottom: 0;
+  left: 15px;
+  height: 1px;
+  background: linear-gradient(90deg,transparent,#d5dbe3,transparent);
+  content: '';
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform .38s cubic-bezier(.22,1,.36,1);
+}
+#root .profile-screen .profile-field-control:hover,
+#root .profile-screen .profile-field-control:focus-within {
+  border-color: rgba(216,223,232,.42) !important;
+  background: rgba(30,36,44,.72) !important;
+  box-shadow: 0 8px 18px rgba(0,0,0,.14),inset 0 1px rgba(255,255,255,.06) !important;
+  transform: translateY(-1px);
+}
+#root .profile-screen .profile-field-control:hover::after,
+#root .profile-screen .profile-field-control:focus-within::after { transform: scaleX(1); }
+#root .profile-screen .profile-field-control > svg { transition: transform .3s ease,color .3s ease; }
+#root .profile-screen .profile-field-control:focus-within > svg { color: #e2e6eb !important; transform: translateY(-1px) scale(1.08); }
+#root .profile-screen .profile-level-choice {
+  position: relative;
+  overflow: hidden;
+  transition: transform .28s cubic-bezier(.22,1,.36,1),border-color .28s ease,box-shadow .28s ease,background .28s ease !important;
+}
+#root .profile-screen .profile-level-choice::before {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: linear-gradient(110deg,transparent 22%,rgba(224,230,238,.13) 48%,transparent 74%);
+  content: '';
+  pointer-events: none;
+  transform: translateX(-125%) skewX(-12deg);
+  transition: transform .72s cubic-bezier(.22,1,.36,1);
+}
+#root .profile-screen .profile-level-choice > span { position: relative; z-index: 2; }
+#root .profile-screen .profile-level-choice:hover::before { transform: translateX(125%) skewX(-12deg); }
+#root .profile-screen .profile-level-choice:hover {
+  border-color: rgba(216,223,232,.48) !important;
+  box-shadow: 0 12px 22px rgba(0,0,0,.2),inset 0 1px rgba(255,255,255,.1) !important;
+  transform: translateY(-4px) perspective(800px) rotateX(2deg);
+}
+#root .profile-screen .profile-level-choice.is-selected,
+#root .profile-screen .profile-level-choice.is-selected:hover {
+  border-color: rgba(224,230,238,.58) !important;
+  background: linear-gradient(145deg,rgba(196,205,217,.2),rgba(124,136,152,.13)) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.1),0 9px 20px rgba(0,0,0,.16) !important;
+}
+#root .profile-screen .profile-heading-icon,
+#root .profile-screen .profile-level-icon,
+#root .profile-screen .profile-level-check,
+#root .profile-screen .profile-save-btn { transition: transform .28s cubic-bezier(.22,1,.36,1),box-shadow .28s ease !important; }
+#root .profile-screen .profile-editor-card:hover .profile-heading-icon { transform: translateY(-2px) rotate(-5deg); }
+#root .profile-screen .profile-level-choice:hover .profile-level-icon { transform: translateZ(10px) rotate(-7deg) scale(1.06); }
+#root .profile-screen .profile-save-btn { position: relative; overflow: hidden; }
+#root .profile-screen .profile-save-btn:hover { transform: translateY(-3px); box-shadow: 0 14px 26px rgba(0,0,0,.28),0 0 24px rgba(198,207,218,.16) !important; }
+#root .profile-screen .profile-save-btn:active { transform: translateY(-1px) scale(.985); }
+#root .profile-screen .profile-response-insights,
+#root .profile-screen .profile-editor-card,
+#root .profile-screen .profile-history-card { min-width: 0; }
+@keyframes profileEmptyPath { to { stroke-dashoffset: -96; } }
+@keyframes profileEmptyPoint { 0%,100% { opacity: .48; transform: scale(.82); transform-box: fill-box; transform-origin: center; } 50% { opacity: 1; transform: scale(1.5); transform-box: fill-box; transform-origin: center; } }
+@media (max-width: 760px) {
+  #root .profile-screen .profile-response-insights { padding: 18px; border: 1px solid rgba(216,223,232,.14) !important; border-radius: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #root .profile-screen .profile-empty-chart-path,
+  #root .profile-screen .profile-empty-chart-point,
+  #root .profile-screen .profile-empty-chart-end { animation: none !important; }
+  #root .profile-screen .profile-field-control,
+  #root .profile-screen .profile-field-control::after,
+  #root .profile-screen .profile-level-choice,
+  #root .profile-screen .profile-level-choice::before,
+  #root .profile-screen .profile-heading-icon,
+  #root .profile-screen .profile-level-icon,
+  #root .profile-screen .profile-level-check,
+  #root .profile-screen .profile-save-btn { transition: none !important; transform: none !important; }
+}
+
+/* Neutral silver detail for the dashboard note and the role artwork. */
+#root .dashboard-unified-panel .first-session-note {
+  border-color: rgba(224,230,238,.16) !important;
+  background: linear-gradient(135deg,rgba(224,230,238,.075),rgba(197,206,218,.025)) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.035) !important;
+}
+#root .setup-unified-panel--voice .setup-role-art-glow,
+#root .setup-unified-panel--text .setup-role-art-glow,
+#root .setup-unified-panel--voice .setup-role-selected-art .setup-role-art-glow,
+#root .setup-unified-panel--text .setup-role-selected-art .setup-role-art-glow {
+  background: rgba(198,207,218,.24) !important;
+  opacity: .46 !important;
+}
+#root .setup-unified-panel--voice .setup-role-photo-orbit,
+#root .setup-unified-panel--text .setup-role-photo-orbit {
+  border-color: rgba(216,223,232,.24) !important;
+  box-shadow: 0 0 0 10px rgba(216,223,232,.035),inset 0 0 20px rgba(216,223,232,.055) !important;
+}
+#root .setup-unified-panel--voice .setup-role-deck-card,
+#root .setup-unified-panel--text .setup-role-deck-card {
+  border-color: rgba(224,230,238,.16) !important;
+  color: #e9ecf0 !important;
+  background: linear-gradient(140deg,#363d47,#292f38) !important;
+}
+#root .setup-unified-panel--voice .setup-role-deck-card:hover,
+#root .setup-unified-panel--text .setup-role-deck-card:hover,
+#root .setup-unified-panel--voice .setup-role-deck-card:focus-visible,
+#root .setup-unified-panel--text .setup-role-deck-card:focus-visible {
+  border-color: rgba(224,230,238,.42) !important;
+  box-shadow: 0 24px 40px rgba(0,0,0,.38),inset 0 1px rgba(255,255,255,.16) !important;
+}
+#root .setup-unified-panel--voice .setup-role-deck-card .setup-choice-overline,
+#root .setup-unified-panel--text .setup-role-deck-card .setup-choice-overline { color: #c2cad5 !important; }
+#root .setup-unified-panel--voice .setup-role-deck-card .setup-role-highlights i,
+#root .setup-unified-panel--text .setup-role-deck-card .setup-role-highlights i {
+  border-color: rgba(224,230,238,.2) !important;
+  color: #e0e5ec !important;
+  background: rgba(197,206,218,.09) !important;
+}

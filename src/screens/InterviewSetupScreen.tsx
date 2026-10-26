@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import SetupIllustration from '@/components/SetupIllustration';
 import SessionConsole from '@/components/SessionConsole';
@@ -107,8 +107,10 @@ const cardMotion = {
 
 /* ── Componente ──────────────────────────────────────── */
 export default function InterviewSetupScreen() {
-  const { mode } = useParams<{ mode: 'voice' | 'text' }>();
+  const { pathname } = useLocation();
   const navigate = useNavigate();
+  // These setup routes are explicit (/setup/voice and /setup/text), not /setup/:mode.
+  const mode: 'voice' | 'text' = pathname === '/setup/text' ? 'text' : 'voice';
   const isVoice = mode === 'voice';
   const motionEnabled = !useReducedMotion();
 

@@ -277,3 +277,57 @@
   color: #e0e5ec !important;
   background: rgba(197,206,218,.09) !important;
 }
+
+/* Errores y alternativa móvil de voz con la misma paleta grafito y plata. */
+#root .flow-error {
+  border-color: rgba(224,230,238,.16) !important;
+  color: #e8ebf0 !important;
+  background: radial-gradient(ellipse at 88% 0%,rgba(174,185,200,.1),transparent 25rem),linear-gradient(145deg,#2d333d,#20252d) !important;
+  box-shadow: 0 22px 54px rgba(0,0,0,.28),inset 0 1px rgba(255,255,255,.06) !important;
+}
+#root .flow-error-icon {
+  border-color: rgba(224,230,238,.2) !important;
+  color: #20252c !important;
+  background: linear-gradient(145deg,#e3e7ed,#aeb8c5) !important;
+}
+#root .flow-error-kicker { color: #cbd2dc !important; }
+#root .flow-error h1 { color: #f1f3f6 !important; }
+#root .flow-error-copy { color: #b9c1cc !important; }
+#root .flow-primary {
+  border-color: #d4dae2 !important;
+  color: #171b21 !important;
+  background: linear-gradient(110deg,#e2e6eb,#aeb8c5) !important;
+  box-shadow: 0 7px 18px rgba(0,0,0,.22) !important;
+}
+#root .flow-primary:hover { border-color: #f1f3f6 !important; background: #e2e6eb !important; }
+#root .flow-secondary {
+  border-color: rgba(224,230,238,.2) !important;
+  color: #e0e5ec !important;
+  background: rgba(255,255,255,.055) !important;
+}
+#root .flow-secondary:hover { border-color: rgba(224,230,238,.38) !important; background: rgba(255,255,255,.1) !important; }
+#root .flow-error-actions > * { display: inline-flex; align-items: center; justify-content: center; }
+#root .mobile-voice-fallback-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 13px 15px;
+  border: 1px solid rgba(224,230,238,.16);
+  border-radius: 14px;
+  color: #dce1e8;
+  background: linear-gradient(135deg,rgba(197,206,218,.09),rgba(197,206,218,.035));
+  font-size: 12px;
+  line-height: 1.6;
+}
+#root .mobile-voice-fallback-note svg { margin-top: 2px; color: #cbd2dc; }
+#root .mobile-voice-fallback-note p { margin: 0; }
+@media (max-width: 560px) {
+  #root .flow-error { width: calc(100% - 24px); margin-block: 22px; padding: 22px 18px; border-radius: 18px; }
+  #root .flow-error-actions > * { flex: 1 1 100%; min-height: 46px; justify-content: center; }
+  #root .mobile-nav { padding-bottom: calc(.5rem + env(safe-area-inset-bottom)) !important; }
+  #root .app-main { padding-bottom: calc(6rem + env(safe-area-inset-bottom)) !important; }
+  #root .interview-action-card--voice { padding: 18px !important; }
+  #root .interview-action-card--voice .interview-answer-input { min-height: 148px; font-size: 16px; }
+  #root .interview-action-card--voice .flow-secondary,
+  #root .interview-action-card--voice .interview-feedback-next { flex: 1 1 100%; min-height: 46px; }
+}

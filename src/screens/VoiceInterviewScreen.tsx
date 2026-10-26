@@ -64,6 +64,7 @@ export default function VoiceInterviewScreen() {
   const [qIndex, setQIndex]       = useState(0);
   const [transcript, setTranscript] = useState('');
   const [phase, setPhase]         = useState<Phase>('idle');
+  const [fallbackInputEnabled, setFallbackInputEnabled] = useState(false);
   const [feedback, setFeedback]   = useState<AIFeedback | null>(null);
   const [error, setError]         = useState<string | null>(null);
   const [setupError, setSetupError] = useState<string | null>(null);
@@ -90,6 +91,7 @@ export default function VoiceInterviewScreen() {
     speechWindow && (speechWindow.SpeechRecognition || speechWindow.webkitSpeechRecognition)
       && speechWindow.isSecureContext,
   );
+  const canUseSpeechRecognition = speechRecognitionAvailable && !fallbackInputEnabled;
 
   async function handleExit() {
     if (sessionId) {
@@ -136,12 +138,6 @@ export default function VoiceInterviewScreen() {
         setLoading(false);
         return;
       }
-      if (!resumeSessionId && !speechRecognitionAvailable) {
-        setSetupError('El reconocimiento de voz no está disponible en este navegador. Usa la práctica por texto para continuar.');
-        setLoading(false);
-        return;
-      }
-
       try {
         const { questions, recentlyAnsweredIds, experienceLevel: profileLevel, error: questionError } = await loadInterviewQuestionPool(user.id);
 
@@ -308,7 +304,8 @@ export default function VoiceInterviewScreen() {
     const SpeechRecognition = recognitionWindow.SpeechRecognition || recognitionWindow.webkitSpeechRecognition;
 
     if (!SpeechRecognition || !window.isSecureContext) {
-      setError('Este navegador no ofrece reconocimiento de voz compatible. Puedes continuar la práctica por texto.');
+      setFallbackInputEnabled(true);
+      setError('La transcripción automática no está disponible aquí. Puedes usar el dictado del teclado o escribir tu respuesta.');
       return;
     }
 
@@ -350,6 +347,9 @@ export default function VoiceInterviewScreen() {
         const message = messages[event.error] ?? `El reconocimiento de voz se interrumpió (${event.error}). Vuelve a intentarlo.`;
         recognitionErrorRef.current = message;
         setError(message);
+        if (['not-allowed', 'service-not-allowed', 'audio-capture'].includes(event.error)) {
+          setFallbackInputEnabled(true);
+        }
         stopRecognitionRef.current = true;
       };
 
@@ -383,6 +383,7 @@ export default function VoiceInterviewScreen() {
           : 'No se pudo iniciar el reconocimiento de voz. Inténtalo de nuevo.';
         recognitionErrorRef.current = message;
         setError(message);
+        setFallbackInputEnabled(true);
         setPhase('idle');
       }
     };
@@ -510,6 +511,7 @@ export default function VoiceInterviewScreen() {
     }
     setQIndex(nextIndex);
     setTranscript('');
+    transcriptRef.current = '';
     setFeedback(null);
     setPhase('idle');
     setRecordingTime(0);
@@ -616,44 +618,80 @@ export default function VoiceInterviewScreen() {
       {/* Interfaz de grabación */}
       {phase === 'idle' && (
         <div className="space-y-4">
-          {!speechRecognitionAvailable && (
-            <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3" role="status">
-              <p className="text-sm text-amber-800">Este navegador no permite transcribir voz aquí. Puedes practicar por texto sin perder las respuestas ya guardadas.</p>
-              <Link to="/setup/text" className="flow-secondary inline-flex items-center gap-2">Cambiar a texto <ArrowRight className="h-4 w-4" /></Link>
+          {!canUseSpeechRecognition ? (
+            <div className="mobile-voice-fallback-note" role="status">
+              <Mic className="h-4 w-4 shrink-0" />
+              <p>La sesión está lista. Este dispositivo no ofrece transcripción automática en esta página. Usa el micrófono del teclado para dictar (si está disponible) o escribe tu respuesta; también recibirás retroalimentación.</p>
+            </div>
+          ) : (
+            <div className="bg-amber-50 border border-amber-100 rounded-xl px-4 py-3 flex items-start gap-3">
+              <span className="text-lg">🎙️</span>
+              <div>
+                <p className="text-sm font-semibold text-amber-800">Para mejores resultados</p>
+                <p className="text-xs text-amber-700 mt-0.5">
+                  Asegúrate de estar en un lugar silencioso. El reconocimiento de voz es sensible al ruido de fondo — música, conversaciones o ventiladores pueden afectar la transcripción.
+                </p>
+              </div>
             </div>
           )}
-          {/* Aviso de lugar silencioso */}
-          <div className="bg-amber-50 border border-amber-100 rounded-xl px-4 py-3 flex items-start gap-3">
-            <span className="text-lg">🎙️</span>
-            <div>
-              <p className="text-sm font-semibold text-amber-800">Para mejores resultados</p>
-              <p className="text-xs text-amber-700 mt-0.5">
-                Asegúrate de estar en un lugar silencioso. El reconocimiento de voz es sensible al ruido de fondo — música, conversaciones o ventiladores pueden afectar la transcripción.
-              </p>
-            </div>
-          </div>
 
           <div className="interview-action-card interview-action-card--voice bg-white rounded-2xl border border-slate-200 p-8 text-center">
-            <div className="mb-6">
-              <button
-                onClick={startRecording}
-                disabled={!speechRecognitionAvailable}
-                aria-label={speechRecognitionAvailable ? 'Iniciar grabación de respuesta' : 'Reconocimiento de voz no disponible'}
-                className="interview-record-button relative mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-teal-500 to-cyan-600 shadow-lg shadow-teal-500/30 transition-all hover:scale-105 hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-40"
-              >
-                <Mic className="w-10 h-10 text-white" />
-              </button>
-            </div>
-            <p className="text-slate-600 font-medium">Toca para empezar a grabar tu respuesta</p>
-            <p className="text-sm text-slate-400 mt-1">Habla claro y a un ritmo normal</p>
-
-            <button
-              onClick={nextQuestion}
-              className="mt-6 flex items-center justify-center gap-2 text-slate-500 hover:text-teal-600 font-medium py-2.5 px-5 rounded-xl border border-slate-200 hover:border-teal-200 transition-all mx-auto"
-            >
-              <RefreshCw className="w-4 h-4" />
-              Saltar esta pregunta
-            </button>
+            {canUseSpeechRecognition ? (
+              <>
+                <div className="mb-6">
+                  <button
+                    onClick={startRecording}
+                    aria-label="Iniciar grabación de respuesta"
+                    className="interview-record-button relative mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-teal-500 to-cyan-600 shadow-lg shadow-teal-500/30 transition-all hover:scale-105 hover:shadow-xl"
+                  >
+                    <Mic className="w-10 h-10 text-white" />
+                  </button>
+                </div>
+                <p className="text-slate-600 font-medium">Toca para empezar a grabar tu respuesta</p>
+                <p className="text-sm text-slate-400 mt-1">Habla claro y a un ritmo normal</p>
+                <button
+                  onClick={nextQuestion}
+                  className="mt-6 flex items-center justify-center gap-2 text-slate-500 hover:text-teal-600 font-medium py-2.5 px-5 rounded-xl border border-slate-200 hover:border-teal-200 transition-all mx-auto"
+                >
+                  <RefreshCw className="w-4 h-4" />
+                  Saltar esta pregunta
+                </button>
+              </>
+            ) : (
+              <div className="text-left">
+                <label htmlFor="voice-mobile-answer" className="mb-2 block text-sm font-semibold text-slate-700">Tu respuesta</label>
+                <textarea
+                  id="voice-mobile-answer"
+                  className="interview-answer-input w-full resize-y"
+                  rows={5}
+                  value={transcript}
+                  onChange={(event) => {
+                    const nextTranscript = event.target.value;
+                    if (!transcriptRef.current.trim() && nextTranscript.trim()) startTimeRef.current = Date.now();
+                    transcriptRef.current = nextTranscript;
+                    setTranscript(nextTranscript);
+                    setError(null);
+                  }}
+                  placeholder="Toca aquí y usa el micrófono del teclado para dictar, o escribe tu respuesta…"
+                  autoCapitalize="sentences"
+                  enterKeyHint="done"
+                  spellCheck
+                />
+                <div className="mt-4 flex flex-wrap justify-end gap-3">
+                  {speechRecognitionAvailable && fallbackInputEnabled && (
+                    <button type="button" onClick={() => { setFallbackInputEnabled(false); setError(null); }} className="flow-secondary inline-flex min-h-11 items-center justify-center gap-2">
+                      <Mic className="h-4 w-4" /> Reintentar micrófono
+                    </button>
+                  )}
+                  <button type="button" onClick={nextQuestion} className="flow-secondary inline-flex min-h-11 items-center justify-center gap-2">
+                    <RefreshCw className="h-4 w-4" /> Saltar pregunta
+                  </button>
+                  <button type="button" onClick={() => setPhase('processing')} disabled={!transcript.trim()} className="interview-feedback-next inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-5 font-semibold disabled:cursor-not-allowed disabled:opacity-45">
+                    Enviar respuesta <ArrowRight className="h-4 w-4" />
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       )}
